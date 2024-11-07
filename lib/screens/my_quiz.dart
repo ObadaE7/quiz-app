@@ -4,6 +4,7 @@ import 'package:quiz/models/quiz.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:quiz/widgets/circle_placeholder.dart';
 
 class MyQuiz extends StatefulWidget {
   const MyQuiz({super.key});
@@ -17,10 +18,10 @@ class _MyQuizState extends State<MyQuiz> {
   int? selectedAnswer;
   bool hasAnswered = false;
   int score = 0;
-  int time = 15;
+  int time = 15; // initial time
   Timer? timer;
-  bool isTimeUp = false;
-  bool isQuizStarted = false;
+  bool isTimeUp = false; // to check if time is up
+  bool isQuizStarted = false; // to check if quiz is started in the first time
 
   void startTimer() {
     timer?.cancel();
@@ -76,6 +77,10 @@ class _MyQuizState extends State<MyQuiz> {
         isTimeUp = false;
         quiz.nextQuestion();
         startTimer();
+      } else {
+        timer?.cancel();
+        isTimeUp = false;
+        restartQuiz();
       }
     });
   }
@@ -84,18 +89,25 @@ class _MyQuizState extends State<MyQuiz> {
     var alertStyle = const AlertStyle(
       isCloseButton: false,
       isOverlayTapDismiss: false,
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(24.0),
+        ),
+      ),
+      overlayColor: Colors.black45,
     );
     Alert(
       context: context,
       style: alertStyle,
       type: AlertType.info,
       title: 'تم الانتهاء من الاختبار',
-      desc: 'نتيجتك هي $score/${quiz.questions.length} ',
+      desc: 'نتيجتك هي ${quiz.questions.length}/$score',
       buttons: [
         DialogButton(
           onPressed: () {
             setState(() {
               quiz.reset();
+              isQuizStarted = false;
               selectedAnswer = null;
               hasAnswered = false;
               score = 0;
@@ -105,7 +117,13 @@ class _MyQuizState extends State<MyQuiz> {
             });
             Navigator.pop(context);
           },
-          color: Colors.indigo,
+          gradient: const LinearGradient(
+            colors: [
+              Colors.purple,
+              Colors.pink,
+            ],
+          ),
+          radius: const BorderRadius.all(Radius.circular(16.0)),
           child: const Text(
             "حسنًا",
             style: TextStyle(
@@ -174,13 +192,15 @@ class _MyQuizState extends State<MyQuiz> {
                     ],
                   ),
                 ),
-                Positioned(
+                const Positioned(
                   top: -140,
                   left: -180,
-                  child: CircleAvatar(
-                    radius: 200.0,
-                    backgroundColor: Colors.white.withOpacity(.1),
-                  ),
+                  child: CirclePlaceholder(radius: 200.0),
+                ),
+                const Positioned(
+                  top: -140,
+                  left: -180,
+                  child: CirclePlaceholder(radius: 250.0),
                 ),
                 Positioned(
                   bottom: -50.0,
@@ -310,7 +330,7 @@ class _MyQuizState extends State<MyQuiz> {
                             isQuizStarted = true;
                             startTimer();
                           } else {
-                            !quiz.isFinished() ? nextQuestion() : restartQuiz();
+                            nextQuestion();
                           }
                         });
                       },
@@ -324,7 +344,7 @@ class _MyQuizState extends State<MyQuiz> {
                       ),
                       child: Text(
                         !isQuizStarted
-                            ? 'ابدء'
+                            ? 'ابدأ'
                             : quiz.isFinished()
                                 ? 'إنهاء'
                                 : 'التالي',
