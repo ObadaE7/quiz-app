@@ -94,7 +94,7 @@ class _HomeState extends State<Home> {
                               '1209',
                               style: GoogleFonts.tajawal(
                                 fontSize: 20.0,
-                                color: AppColors.darkBlue,
+                                color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
           ),
         ),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: const Color(0xFFFAFAFA),
     );
   }
 }

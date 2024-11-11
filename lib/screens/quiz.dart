@@ -225,6 +225,7 @@ class _MyQuizState extends State<MyQuiz> {
             ],
           ),
         ),
+        backgroundColor: const Color(0xFFFAFAFA),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -389,7 +390,7 @@ class _MyQuizState extends State<MyQuiz> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         child: FilledButton(
           onPressed: () {
             setState(() {
@@ -426,7 +427,7 @@ class _MyQuizState extends State<MyQuiz> {
           ),
         ),
       ),
-      backgroundColor: AppColors.white,
+      backgroundColor: const Color(0xFFFAFAFA),
     );
   }
 }

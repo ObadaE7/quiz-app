@@ -1,5 +1,6 @@
 import 'package:quiz/models/category.dart';
 import 'package:quiz/models/question.dart';
+import 'package:quiz/models/leaderboard.dart';
 
 class DummyData {
   static List<Category> categories = [
@@ -592,6 +593,87 @@ class DummyData {
       options: ['نهر النيل', 'نهر الأمازون', 'نهر الميسيسيبي', 'نهر الغانج'],
       answer: 1,
       categoryId: 6,
+    ),
+  ];
+
+  static List<Leaderboard> leaderboard = [
+    Leaderboard(
+      rank: 1,
+      name: "عبادة",
+      avatar: 'images/avatar-1.png',
+      score: 145.093,
+    ),
+    Leaderboard(
+      rank: 2,
+      name: "محمد",
+      avatar: 'images/avatar-2.png',
+      score: 139.874,
+    ),
+    Leaderboard(
+      rank: 3,
+      name: "فاطمة",
+      avatar: 'images/avatar-3.png',
+      score: 128.657,
+    ),
+    Leaderboard(
+      rank: 4,
+      name: "سارة",
+      avatar: 'images/avatar-4.png',
+      score: 117.348,
+    ),
+    Leaderboard(
+      rank: 5,
+      name: "نورة",
+      avatar: 'images/avatar-5.png',
+      score: 110.592,
+    ),
+    Leaderboard(
+      rank: 6,
+      name: "خالد",
+      avatar: 'images/avatar-6.png',
+      score: 104.781,
+    ),
+    Leaderboard(
+      rank: 7,
+      name: "مريم",
+      avatar: 'images/avatar-7.png',
+      score: 98.674,
+    ),
+    Leaderboard(
+      rank: 8,
+      name: "سعيد",
+      avatar: 'images/avatar-8.png',
+      score: 93.572,
+    ),
+    Leaderboard(
+      rank: 9,
+      name: "أحمد",
+      avatar: 'images/avatar-9.png',
+      score: 89.463,
+    ),
+    Leaderboard(
+      rank: 10,
+      name: "ريم",
+      avatar: 'images/avatar-10.png',
+      score: 84.357,
+    ),
+    Leaderboard(
+      rank: 11,
+      name: "ماجد",
+      avatar: 'images/avatar-11.png',
+      score: 79.541,
+    ),
+    Leaderboard(
+      rank: 12,
+      name: "علي",
+      avatar: 'images/avatar-12.png',
+      score: 74.823,
+    ),
+    Leaderboard(
+      rank: 13,
+      name: "مها",
+      avatar: 'images/avatar-13.png',
+      score: 69.407,
     ),
   ];
 }
