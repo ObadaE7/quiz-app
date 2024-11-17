@@ -107,7 +107,7 @@ class Leaderboard extends StatelessWidget {
                       const Positioned(
                         top: -95,
                         child: Image(
-                          image: AssetImage('images/crown.png'),
+                          image: AssetImage('assets/animations/crown.png'),
                           width: 50.0,
                           height: 50.0,
                         ),

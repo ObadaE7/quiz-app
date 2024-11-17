@@ -23,7 +23,7 @@ class Home extends StatelessWidget {
                 children: [
                   const CircleAvatar(
                     radius: 30.0,
-                    backgroundImage: AssetImage('images/avatar.png'),
+                    backgroundImage: AssetImage('assets/avatars/avatar-1.png'),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -97,7 +97,7 @@ class Home extends StatelessWidget {
                         ),
                         const SizedBox(width: 20.0),
                         const Image(
-                          image: AssetImage('images/coin.png'),
+                          image: AssetImage('assets/animations/coin.png'),
                           height: 40.0,
                           width: 40.0,
                           fit: BoxFit.cover,
@@ -130,7 +130,7 @@ class Home extends StatelessWidget {
                         ),
                         const SizedBox(width: 20.0),
                         const Image(
-                          image: AssetImage('images/trophy.png'),
+                          image: AssetImage('assets/animations/trophy.png'),
                           height: 40.0,
                           width: 40.0,
                           fit: BoxFit.cover,

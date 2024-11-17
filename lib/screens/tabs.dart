@@ -39,7 +39,7 @@ class _TabsState extends State<Tabs> {
           BottomNavigationBarItem(
             label: 'الرئيسية',
             icon: Image(
-              image: AssetImage('images/3d-house.png'),
+              image: AssetImage('assets/icons/home.png'),
               height: 35.0,
               width: 35.0,
             ),
@@ -47,7 +47,7 @@ class _TabsState extends State<Tabs> {
           BottomNavigationBarItem(
             label: 'لوحة المتصدرين',
             icon: Image(
-              image: AssetImage('images/podium.png'),
+              image: AssetImage('assets/icons/podium.png'),
               height: 35.0,
               width: 35.0,
             ),
@@ -55,7 +55,7 @@ class _TabsState extends State<Tabs> {
           BottomNavigationBarItem(
             label: 'ملفي الشخصي',
             icon: Image(
-              image: AssetImage('images/prince.png'),
+              image: AssetImage('assets/icons/prince.png'),
               height: 35.0,
               width: 35.0,
             ),
@@ -63,7 +63,7 @@ class _TabsState extends State<Tabs> {
           BottomNavigationBarItem(
             label: 'الإعدادات',
             icon: Image(
-              image: AssetImage('images/settings.png'),
+              image: AssetImage('assets/icons/settings.png'),
               height: 35.0,
               width: 35.0,
             ),

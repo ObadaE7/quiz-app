@@ -1,8 +1,8 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz/screens/tabs.dart';
 import 'package:quiz/utils/app_colors.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 
 class FinishQuiz extends StatefulWidget {
   final int questionCount;
@@ -46,7 +46,9 @@ class _FinishQuizState extends State<FinishQuiz> {
           children: [
             Image(
               image: AssetImage(
-                isPassed ? "images/party.png" : "images/peeking.png",
+                isPassed
+                    ? "assets/animations/party.png"
+                    : "assets/animations/peeking.png",
               ),
               height: 150,
               width: 150,

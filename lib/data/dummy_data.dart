@@ -9,7 +9,7 @@ class DummyData {
       title: 'الرياضة',
       description:
           'اختبر معرفتك في عالم الرياضة! مجموعة من الأسئلة المتنوعة حول الألعاب، البطولات، والرياضيين المشهورين.',
-      imagePath: 'images/sports.png',
+      imagePath: 'assets/categories/sports.png',
       questionCount: 30,
     ),
     Category(
@@ -17,7 +17,7 @@ class DummyData {
       title: 'الكيمياء',
       description:
           'هل أنت مستعد لاكتشاف العناصر، التفاعلات، والمركبات الكيميائية؟ استعد لتحدي معلوماتك في الكيمياء.',
-      imagePath: 'images/chemistry.png',
+      imagePath: 'assets/categories/chemistry.png',
       questionCount: 30,
     ),
     Category(
@@ -25,7 +25,7 @@ class DummyData {
       title: 'الرياضيات',
       description:
           'اختبر مهاراتك في الحساب، الأشكال، والمعادلات. رحلة مثيرة لعشاق الأرقام والتفكير المنطقي!',
-      imagePath: 'images/math.png',
+      imagePath: 'assets/categories/math.png',
       questionCount: 30,
     ),
     Category(
@@ -33,7 +33,7 @@ class DummyData {
       title: 'التاريخ',
       description:
           'استرجع الأحداث، الشخصيات، والمراحل التاريخية التي شكلت العالم. اكتشف مدى معرفتك بالتاريخ.',
-      imagePath: 'images/history.png',
+      imagePath: 'assets/categories/history.png',
       questionCount: 30,
     ),
     Category(
@@ -41,7 +41,7 @@ class DummyData {
       title: 'الأحياء',
       description:
           'هل لديك شغف بالكائنات الحية؟ تحدّ معرفتك بالأحياء، من الخلايا إلى الأنظمة البيئية.',
-      imagePath: 'images/biological.png',
+      imagePath: 'assets/categories/biological.png',
       questionCount: 30,
     ),
     Category(
@@ -49,7 +49,7 @@ class DummyData {
       title: 'الجغرافيا',
       description:
           'استكشف العالم من خلال الأسئلة الجغرافية حول البلدان، التضاريس، والمناخات المتنوعة.',
-      imagePath: 'images/geography.png',
+      imagePath: 'assets/categories/geography.png',
       questionCount: 30,
     ),
   ];
@@ -612,79 +612,79 @@ class DummyData {
     Leaderboard(
       rank: 1,
       name: "عبادة",
-      avatar: 'images/avatar-1.png',
+      avatar: 'assets/avatars/avatar-1.png',
       score: 145.093,
     ),
     Leaderboard(
       rank: 2,
       name: "محمد",
-      avatar: 'images/avatar-2.png',
+      avatar: 'assets/avatars/avatar-2.png',
       score: 139.874,
     ),
     Leaderboard(
       rank: 3,
       name: "فاطمة",
-      avatar: 'images/avatar-3.png',
+      avatar: 'assets/avatars/avatar-3.png',
       score: 128.657,
     ),
     Leaderboard(
       rank: 4,
       name: "سارة",
-      avatar: 'images/avatar-4.png',
+      avatar: 'assets/avatars/avatar-4.png',
       score: 117.348,
     ),
     Leaderboard(
       rank: 5,
       name: "نورة",
-      avatar: 'images/avatar-5.png',
+      avatar: 'assets/avatars/avatar-5.png',
       score: 110.592,
     ),
     Leaderboard(
       rank: 6,
       name: "خالد",
-      avatar: 'images/avatar-6.png',
+      avatar: 'assets/avatars/avatar-6.png',
       score: 104.781,
     ),
     Leaderboard(
       rank: 7,
       name: "مريم",
-      avatar: 'images/avatar-7.png',
+      avatar: 'assets/avatars/avatar-7.png',
       score: 98.674,
     ),
     Leaderboard(
       rank: 8,
       name: "سعيد",
-      avatar: 'images/avatar-8.png',
+      avatar: 'assets/avatars/avatar-8.png',
       score: 93.572,
     ),
     Leaderboard(
       rank: 9,
       name: "أحمد",
-      avatar: 'images/avatar-9.png',
+      avatar: 'assets/avatars/avatar-9.png',
       score: 89.463,
     ),
     Leaderboard(
       rank: 10,
       name: "ريم",
-      avatar: 'images/avatar-10.png',
+      avatar: 'assets/avatars/avatar-10.png',
       score: 84.357,
     ),
     Leaderboard(
       rank: 11,
       name: "ماجد",
-      avatar: 'images/avatar-11.png',
+      avatar: 'assets/avatars/avatar-11.png',
       score: 79.541,
     ),
     Leaderboard(
       rank: 12,
       name: "علي",
-      avatar: 'images/avatar-12.png',
+      avatar: 'assets/avatars/avatar-12.png',
       score: 74.823,
     ),
     Leaderboard(
       rank: 13,
       name: "مها",
-      avatar: 'images/avatar-13.png',
+      avatar: 'assets/avatars/avatar-13.png',
       score: 69.407,
     ),
   ];

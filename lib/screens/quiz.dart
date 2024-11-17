@@ -96,7 +96,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
         } else {
           timer.cancel();
           isTimeUp = true;
-          playSound('wrong.aac');
+          playSound('sounds/wrong.aac');
           nextQuestion();
         }
       });
@@ -120,9 +120,9 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
       circularIndicatorController.stop();
       if (userPickedAnswer == quiz.getAnswer()) {
         score++;
-        playSound('correct.aac');
+        playSound('sounds/correct.aac');
       } else {
-        playSound('wrong.aac');
+        playSound('sounds/wrong.aac');
       }
     });
   }
@@ -222,7 +222,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
               context: context,
               style: alertStyle,
               image: const Image(
-                image: AssetImage('images/warning.png'),
+                image: AssetImage('assets/animations/warning.png'),
                 width: 90.0,
                 height: 90.0,
               ),
