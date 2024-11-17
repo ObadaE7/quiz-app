@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/home.dart';
-import 'package:quiz/models/category.dart';
+import 'package:quiz/screens/finish_quiz.dart';
+import 'package:quiz/screens/tabs.dart';
 import 'package:quiz/models/quiz.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -12,42 +12,87 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MyQuiz extends StatefulWidget {
-  final Category category;
-  const MyQuiz({
-    super.key,
-    required this.category,
-  });
+  final int categoryId;
+  const MyQuiz({super.key, required this.categoryId});
 
   @override
   State<MyQuiz> createState() => _MyQuizState();
 }
 
-class _MyQuizState extends State<MyQuiz> {
-  // Quiz variables
+class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
+  // Circular indicator
+  late AnimationController circularIndicatorController;
+  late Animation<double> circularIndicatorAnimation;
+  late Animation circularIndicatorColorAnimation;
+  // Linear indicator
+  late AnimationController linearIndicatorController;
+  late Animation<double> linearIndicatorAnimation;
+
   Quiz quiz = Quiz();
+  int score = 0;
   int? selectedAnswer;
   bool hasAnswered = false;
-  int score = 0;
-  // Timer variables
-  int initTime = 15;
+
   Timer? timer;
+  int initTime = 15;
+  int remainingTime = 0;
   bool isTimeUp = false;
-  bool isQuizStarted = false;
+  bool isTimePaused = false;
 
   @override
   void initState() {
     super.initState();
+    // Filter questions
     quiz.questionsList = DummyData.questions
-        .where((question) => question.categoryId == widget.category.id)
+        .where((question) => question.categoryId == widget.categoryId)
         .toList();
+    quiz.shuffleQuestions();
+
+    // Initialize circular indicator
+    circularIndicatorController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: initTime),
+    );
+    circularIndicatorAnimation =
+        Tween<double>(begin: 1, end: 0).animate(circularIndicatorController);
+    circularIndicatorColorAnimation = ColorTween(
+      begin: AppColors.primary,
+      end: AppColors.danger,
+    ).animate(circularIndicatorController);
+
+    // Initialize linear indicator
+    linearIndicatorController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    linearIndicatorAnimation = Tween<double>(
+      begin: 0,
+      end: 1 / quiz.questionsList.length,
+    ).animate(linearIndicatorController);
+
+    linearIndicatorController.forward();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+    circularIndicatorController.dispose();
+    linearIndicatorController.dispose();
   }
 
   void startTimer() {
     timer?.cancel();
+    circularIndicatorController.reset();
+    circularIndicatorController.forward();
+    if (isTimePaused) isTimePaused = false;
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (initTime > 0) {
           initTime--;
+          remainingTime = initTime;
         } else {
           timer.cancel();
           isTimeUp = true;
@@ -58,6 +103,13 @@ class _MyQuizState extends State<MyQuiz> {
     });
   }
 
+  void pauseTimer() {
+    if (timer != null && timer!.isActive) {
+      timer!.cancel();
+      isTimePaused = true;
+    }
+  }
+
   void checkAnswer(int userPickedAnswer) {
     if (hasAnswered) return;
     setState(() {
@@ -65,6 +117,7 @@ class _MyQuizState extends State<MyQuiz> {
       hasAnswered = true;
       isTimeUp = false;
       timer?.cancel();
+      circularIndicatorController.stop();
       if (userPickedAnswer == quiz.getAnswer()) {
         score++;
         playSound('correct.aac');
@@ -75,6 +128,11 @@ class _MyQuizState extends State<MyQuiz> {
   }
 
   void nextQuestion() {
+    // Clear the snack bar if the user does not select an answer
+    // and clicks the next button multiple times and then answers the question,
+    // to prevent the snack bar from continuing to display
+    ScaffoldMessenger.of(context).clearSnackBars();
+
     if (!hasAnswered && !isTimeUp) {
       const snackBar = SnackBar(
         content: Text(
@@ -99,65 +157,30 @@ class _MyQuizState extends State<MyQuiz> {
         hasAnswered = false;
         initTime = 15;
         isTimeUp = false;
+        linearIndicatorController.reset();
+
+        linearIndicatorAnimation = Tween<double>(
+          begin: (quiz.getQuestionNumber() + 1) / quiz.questionsList.length,
+          end: (quiz.getQuestionNumber() + 2) / quiz.questionsList.length,
+        ).animate(linearIndicatorController);
+
+        linearIndicatorController.forward();
         quiz.nextQuestion();
         startTimer();
       } else {
         timer?.cancel();
         isTimeUp = false;
-        restartQuiz();
-      }
-    });
-  }
-
-  void restartQuiz() {
-    var alertStyle = const AlertStyle(
-      isCloseButton: false,
-      isOverlayTapDismiss: false,
-      alertBorder: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(24.0),
-        ),
-      ),
-      overlayColor: Colors.black45,
-    );
-    Alert(
-      context: context,
-      style: alertStyle,
-      type: AlertType.info,
-      title: 'تم الانتهاء من الاختبار',
-      desc: 'نتيجتك هي ${quiz.questionsList.length}/$score',
-      buttons: [
-        DialogButton(
-          onPressed: () {
-            setState(() {
-              quiz.reset();
-              isQuizStarted = false;
-              selectedAnswer = null;
-              hasAnswered = false;
-              score = 0;
-              timer?.cancel();
-              initTime = 15;
-              isTimeUp = false;
-            });
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const Home(),
-              ),
-            );
-          },
-          color: AppColors.primary,
-          radius: const BorderRadius.all(Radius.circular(16.0)),
-          child: const Text(
-            "حسنًا",
-            style: TextStyle(
-              color: AppColors.white,
-              fontSize: 20.0,
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FinishQuiz(
+              questionCount: quiz.questionsList.length,
+              score: score,
             ),
           ),
-        ),
-      ],
-    ).show();
+        );
+      }
+    });
   }
 
   Future<void> playSound(String soundPath) async {
@@ -183,7 +206,80 @@ class _MyQuizState extends State<MyQuiz> {
             color: AppColors.charcoal,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            pauseTimer();
+            circularIndicatorController.stop();
+            var alertStyle = const AlertStyle(
+              isCloseButton: false,
+              isOverlayTapDismiss: false,
+              alertBorder: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(24.0),
+                ),
+              ),
+              overlayColor: Colors.black45,
+            );
+            Alert(
+              context: context,
+              style: alertStyle,
+              image: const Image(
+                image: AssetImage('images/warning.png'),
+                width: 90.0,
+                height: 90.0,
+              ),
+              title: 'إنهاء الاختبار',
+              content: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  'هل ترغب في إنهاء الاختبار الآن؟ سيتم فقدان جميع الإجابات غير المحفوظة.',
+                  style: GoogleFonts.tajawal(
+                    color: AppColors.gray,
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  textAlign: TextAlign.center,
+                  textDirection: TextDirection.rtl,
+                ),
+              ),
+              buttons: [
+                DialogButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Tabs(),
+                      ),
+                    );
+                  },
+                  color: AppColors.danger,
+                  radius: const BorderRadius.all(Radius.circular(16.0)),
+                  child: const Text(
+                    "الإنهاء",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+                DialogButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    if (!hasAnswered && !isTimeUp) {
+                      startTimer();
+                      circularIndicatorController.forward();
+                    }
+                  },
+                  color: AppColors.primary,
+                  radius: const BorderRadius.all(Radius.circular(16.0)),
+                  child: const Text(
+                    "المتابعة",
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ),
+              ],
+            ).show();
           },
         ),
         title: Container(
@@ -200,14 +296,16 @@ class _MyQuizState extends State<MyQuiz> {
           child: Row(
             children: [
               Expanded(
-                child: LinearProgressIndicator(
-                  value: (quiz.getQuestionNumber() + 1) /
-                      quiz.questionsList.length,
-                  minHeight: 10.0,
-                  color: AppColors.secondary,
-                  backgroundColor: AppColors.lightGray,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(8.0),
+                child: AnimatedBuilder(
+                  animation: linearIndicatorController,
+                  builder: (context, child) => LinearProgressIndicator(
+                    value: linearIndicatorAnimation.value,
+                    minHeight: 10.0,
+                    color: AppColors.secondary,
+                    backgroundColor: AppColors.lightGray,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(8.0),
+                    ),
                   ),
                 ),
               ),
@@ -264,6 +362,7 @@ class _MyQuizState extends State<MyQuiz> {
                           ),
                         ),
                         textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
                       ),
                     ],
                   ),
@@ -276,16 +375,21 @@ class _MyQuizState extends State<MyQuiz> {
                     child: Stack(
                       alignment: Alignment.center,
                       children: [
-                        SizedBox(
-                          width: 60.0,
-                          height: 60.0,
-                          child: CircularProgressIndicator(
-                            color: AppColors.primary,
-                            strokeWidth: 6.0,
-                            strokeCap: StrokeCap.round,
-                            value: initTime / 15,
-                            backgroundColor: AppColors.lightGray,
-                          ),
+                        AnimatedBuilder(
+                          animation: circularIndicatorController,
+                          builder: (context, child) {
+                            return SizedBox(
+                              width: 60.0,
+                              height: 60.0,
+                              child: CircularProgressIndicator(
+                                color: circularIndicatorColorAnimation.value,
+                                strokeWidth: 6.0,
+                                strokeCap: StrokeCap.round,
+                                value: circularIndicatorAnimation.value,
+                                backgroundColor: AppColors.lightGray,
+                              ),
+                            );
+                          },
                         ),
                         Positioned(
                           top: 12.0,
@@ -318,11 +422,9 @@ class _MyQuizState extends State<MyQuiz> {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 16.0),
                   child: FilledButton(
-                    onPressed: isQuizStarted
-                        ? () {
-                            checkAnswer(index);
-                          }
-                        : null,
+                    onPressed: () {
+                      checkAnswer(index);
+                    },
                     style: ButtonStyle(
                       side: WidgetStatePropertyAll(
                         BorderSide(
@@ -393,31 +495,23 @@ class _MyQuizState extends State<MyQuiz> {
         padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 20.0),
         child: FilledButton(
           onPressed: () {
-            setState(() {
-              if (!isQuizStarted) {
-                isQuizStarted = true;
-                startTimer();
-              } else {
-                nextQuestion();
-              }
-            });
+            nextQuestion();
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary,
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            shape: SmoothRectangleBorder(
-              borderRadius: SmoothBorderRadius(
-                cornerRadius: 25.0,
-                cornerSmoothing: 1.0,
+          style: ButtonStyle(
+            backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
+            padding: const WidgetStatePropertyAll(
+                EdgeInsets.symmetric(vertical: 16.0)),
+            shape: WidgetStatePropertyAll(
+              SmoothRectangleBorder(
+                borderRadius: SmoothBorderRadius(
+                  cornerRadius: 25.0,
+                  cornerSmoothing: 1.0,
+                ),
               ),
             ),
           ),
           child: Text(
-            !isQuizStarted
-                ? 'ابدأ'
-                : quiz.isFinished()
-                    ? 'إنهاء'
-                    : 'التالي',
+            quiz.isFinished() ? 'إنهاء' : 'التالي',
             style: GoogleFonts.tajawal(
               textStyle: const TextStyle(
                 color: AppColors.white,

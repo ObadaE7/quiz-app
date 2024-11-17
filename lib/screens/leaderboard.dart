@@ -118,7 +118,7 @@ class Leaderboard extends StatelessWidget {
                 // Second rank
                 Positioned(
                   bottom: 20.0,
-                  left: 60,
+                  left: MediaQuery.of(context).size.width * 0.09,
                   child: LeaderboardRank(
                     width: 92.0,
                     height: 132.0,
@@ -134,7 +134,7 @@ class Leaderboard extends StatelessWidget {
                 // Third rank
                 Positioned(
                   bottom: 20.0,
-                  right: 60,
+                  right: MediaQuery.of(context).size.width * 0.09,
                   child: LeaderboardRank(
                     width: 92.0,
                     height: 132.0,

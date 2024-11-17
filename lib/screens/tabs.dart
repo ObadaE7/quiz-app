@@ -3,7 +3,6 @@ import 'package:quiz/screens/home.dart';
 import 'package:quiz/screens/leaderboard.dart';
 import 'package:quiz/screens/profile.dart';
 import 'package:quiz/screens/settings.dart';
-import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:quiz/utils/app_colors.dart';
 
 class Tabs extends StatefulWidget {
@@ -35,27 +34,39 @@ class _TabsState extends State<Tabs> {
         unselectedItemColor: AppColors.gray,
         selectedFontSize: 14.0,
         unselectedFontSize: 12.0,
-        showUnselectedLabels: false,
+        // showUnselectedLabels: false,
         items: const [
           BottomNavigationBarItem(
             label: 'الرئيسية',
-            icon: Icon(IconsaxPlusLinear.home_2),
-            activeIcon: Icon(IconsaxPlusBold.home_2),
+            icon: Image(
+              image: AssetImage('images/3d-house.png'),
+              height: 35.0,
+              width: 35.0,
+            ),
           ),
           BottomNavigationBarItem(
             label: 'لوحة المتصدرين',
-            icon: Icon(IconsaxPlusLinear.cup),
-            activeIcon: Icon(IconsaxPlusBold.cup),
+            icon: Image(
+              image: AssetImage('images/podium.png'),
+              height: 35.0,
+              width: 35.0,
+            ),
           ),
           BottomNavigationBarItem(
-            label: 'الحساب',
-            icon: Icon(IconsaxPlusLinear.user),
-            activeIcon: Icon(IconsaxPlusBold.user),
+            label: 'ملفي الشخصي',
+            icon: Image(
+              image: AssetImage('images/prince.png'),
+              height: 35.0,
+              width: 35.0,
+            ),
           ),
           BottomNavigationBarItem(
-            label: 'الاعدادات',
-            icon: Icon(IconsaxPlusLinear.setting_2),
-            activeIcon: Icon(IconsaxPlusBold.setting_2),
+            label: 'الإعدادات',
+            icon: Image(
+              image: AssetImage('images/settings.png'),
+              height: 35.0,
+              width: 35.0,
+            ),
           ),
         ],
       ),

@@ -33,4 +33,8 @@ class Quiz {
   bool isFinished() {
     return _questionNumber == questionsList.length - 1;
   }
+
+  void shuffleQuestions() {
+    questionsList.shuffle();
+  }
 }

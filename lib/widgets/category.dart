@@ -90,9 +90,11 @@ class Category extends StatelessWidget {
                   spreadRadius: -10,
                 ),
               ],
-              image: DecorationImage(
+            ),
+            child: Hero(
+              tag: title,
+              child: Image(
                 image: AssetImage(imagePath),
-                fit: BoxFit.cover,
               ),
             ),
           ),

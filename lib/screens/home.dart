@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/quiz.dart';
+import 'package:quiz/screens/start_quiz.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/widgets/category.dart';
 import 'package:quiz/data/dummy_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 
-class Home extends StatefulWidget {
+class Home extends StatelessWidget {
   const Home({super.key});
 
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,9 +62,9 @@ class _HomeState extends State<Home> {
                   color: Colors.white,
                   shadows: [
                     BoxShadow(
-                      blurRadius: 5,
-                      offset: const Offset(0, 1),
                       color: Colors.black.withOpacity(0.1),
+                      blurRadius: 2,
+                      offset: const Offset(1, 1),
                     ),
                   ],
                 ),
@@ -146,13 +141,42 @@ class _HomeState extends State<Home> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const Text(
-                '!جاهز للتحدي؟ اضغط وابدأ',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.charcoal,
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {},
+                        child: Text(
+                          'عرض الكل',
+                          style: GoogleFonts.tajawal(
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.primary,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'جاهز للتحدي؟',
+                        style: GoogleFonts.tajawal(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.charcoal,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    'قم باختيار التصنيف المناسب لك وابدأ الاختبار',
+                    style: GoogleFonts.tajawal(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.gray,
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 40.0),
               GridView.builder(
@@ -170,7 +194,7 @@ class _HomeState extends State<Home> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MyQuiz(
+                        builder: (context) => StartQuiz(
                           category: DummyData.categories[index],
                         ),
                       ),

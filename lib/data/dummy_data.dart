@@ -7,36 +7,48 @@ class DummyData {
     Category(
       id: 1,
       title: 'الرياضة',
+      description:
+          'اختبر معرفتك في عالم الرياضة! مجموعة من الأسئلة المتنوعة حول الألعاب، البطولات، والرياضيين المشهورين.',
       imagePath: 'images/sports.png',
       questionCount: 30,
     ),
     Category(
       id: 2,
       title: 'الكيمياء',
+      description:
+          'هل أنت مستعد لاكتشاف العناصر، التفاعلات، والمركبات الكيميائية؟ استعد لتحدي معلوماتك في الكيمياء.',
       imagePath: 'images/chemistry.png',
       questionCount: 30,
     ),
     Category(
       id: 3,
       title: 'الرياضيات',
+      description:
+          'اختبر مهاراتك في الحساب، الأشكال، والمعادلات. رحلة مثيرة لعشاق الأرقام والتفكير المنطقي!',
       imagePath: 'images/math.png',
       questionCount: 30,
     ),
     Category(
       id: 4,
       title: 'التاريخ',
+      description:
+          'استرجع الأحداث، الشخصيات، والمراحل التاريخية التي شكلت العالم. اكتشف مدى معرفتك بالتاريخ.',
       imagePath: 'images/history.png',
       questionCount: 30,
     ),
     Category(
       id: 5,
       title: 'الأحياء',
+      description:
+          'هل لديك شغف بالكائنات الحية؟ تحدّ معرفتك بالأحياء، من الخلايا إلى الأنظمة البيئية.',
       imagePath: 'images/biological.png',
       questionCount: 30,
     ),
     Category(
       id: 6,
       title: 'الجغرافيا',
+      description:
+          'استكشف العالم من خلال الأسئلة الجغرافية حول البلدان، التضاريس، والمناخات المتنوعة.',
       imagePath: 'images/geography.png',
       questionCount: 30,
     ),
