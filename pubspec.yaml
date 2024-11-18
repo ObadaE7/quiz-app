@@ -41,6 +41,7 @@ dependencies:
   figma_squircle: ^0.5.3
   iconsax_plus: ^1.0.0
   hugeicons: ^0.0.7
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:

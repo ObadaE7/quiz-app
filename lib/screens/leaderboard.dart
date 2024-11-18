@@ -1,8 +1,10 @@
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:quiz/data/dummy_data.dart';
+import 'package:quiz/widgets/bottom_curved_clip_path.dart';
+import 'package:quiz/widgets/circle_placeholder.dart';
 import 'package:quiz/utils/app_colors.dart';
+import 'package:quiz/data/dummy_data.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:figma_squircle/figma_squircle.dart';
 
 class Leaderboard extends StatelessWidget {
   const Leaderboard({super.key});
@@ -16,74 +18,78 @@ class Leaderboard extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 400.0,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF3EB8D4),
-                        Color(0xFF1F8DA6),
-                      ],
-                    ),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    clipBehavior: Clip.none,
-                    children: [
-                      const Positioned(
-                        top: -50.0,
-                        right: -100.0,
-                        child: CirclePlaceholder(radius: 100.0),
-                      ),
-                      Column(
-                        children: [
-                          Text(
-                            'لوحة المتصدرين',
-                            style: GoogleFonts.tajawal(
-                              color: AppColors.white,
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 5.0),
-                          Container(
-                            width: 327.0,
-                            height: 53.0,
-                            decoration: ShapeDecoration(
-                              color: AppColors.white,
-                              shape: SmoothRectangleBorder(
-                                borderRadius: SmoothBorderRadius(
-                                  cornerRadius: 16.0,
-                                  cornerSmoothing: 1.0,
-                                ),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                ButtonRankedBy(
-                                  onPressed: () {},
-                                  text: 'شهرياً',
-                                ),
-                                ButtonRankedBy(
-                                  onPressed: () {},
-                                  text: 'هذا الإسبوع',
-                                ),
-                                ButtonRankedBy(
-                                  onPressed: () {},
-                                  text: 'كل الأوقات',
-                                  isButtonActive: true,
-                                ),
-                              ],
-                            ),
-                          ),
+                ClipPath(
+                  clipper: BottomCurvedClipper(),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    width: MediaQuery.of(context).size.width,
+                    height: 400.0,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFF3EB8D4),
+                          Color(0xFF1F8DA6),
                         ],
                       ),
-                    ],
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      clipBehavior: Clip.none,
+                      children: [
+                        const Positioned(
+                          top: -50.0,
+                          right: -100.0,
+                          child: CirclePlaceholder(radius: 100.0),
+                        ),
+                        Column(
+                          children: [
+                            Text(
+                              'لوحة المتصدرين',
+                              style: GoogleFonts.tajawal(
+                                color: AppColors.white,
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 5.0),
+                            Container(
+                              width: 327.0,
+                              height: 53.0,
+                              decoration: ShapeDecoration(
+                                color: AppColors.white,
+                                shape: SmoothRectangleBorder(
+                                  borderRadius: SmoothBorderRadius(
+                                    cornerRadius: 16.0,
+                                    cornerSmoothing: 1.0,
+                                  ),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  ButtonRankedBy(
+                                    onPressed: () {},
+                                    text: 'شهرياً',
+                                  ),
+                                  ButtonRankedBy(
+                                    onPressed: () {},
+                                    text: 'هذا الإسبوع',
+                                  ),
+                                  ButtonRankedBy(
+                                    onPressed: () {},
+                                    text: 'كل الأوقات',
+                                    isButtonActive: true,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 // First rank
@@ -117,7 +123,7 @@ class Leaderboard extends StatelessWidget {
                 ),
                 // Second rank
                 Positioned(
-                  bottom: 20.0,
+                  bottom: 10.0,
                   left: MediaQuery.of(context).size.width * 0.09,
                   child: LeaderboardRank(
                     width: 92.0,
@@ -133,7 +139,7 @@ class Leaderboard extends StatelessWidget {
                 ),
                 // Third rank
                 Positioned(
-                  bottom: 20.0,
+                  bottom: 10.0,
                   right: MediaQuery.of(context).size.width * 0.09,
                   child: LeaderboardRank(
                     width: 92.0,
@@ -147,14 +153,7 @@ class Leaderboard extends StatelessWidget {
                     rankColor: const Color(0xFFFF9F41),
                   ),
                 ),
-                //  Bottom rounded shape
-                const Positioned(
-                  bottom: -950.0,
-                  child: CircleAvatar(
-                    radius: 500,
-                    backgroundColor: Color(0xFFfafafa),
-                  ),
-                ),
+
                 // Circles
                 const Positioned(
                   top: -50.0,
@@ -410,25 +409,6 @@ class ListTileLeaderboard extends StatelessWidget {
           cornerRadius: 16.0,
         ),
       ),
-    );
-  }
-}
-
-class CirclePlaceholder extends StatelessWidget {
-  final double radius;
-  final double? opacity;
-
-  const CirclePlaceholder({
-    super.key,
-    required this.radius,
-    this.opacity = 0.1,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: Colors.white.withOpacity(opacity!),
     );
   }
 }

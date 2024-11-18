@@ -5,6 +5,8 @@ import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quiz/widgets/bottom_curved_clip_path.dart';
+import 'package:quiz/widgets/circle_placeholder.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 
 class StartQuiz extends StatelessWidget {
@@ -17,58 +19,52 @@ class StartQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFAFAFA),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Stack(
               alignment: Alignment.center,
               children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  width: MediaQuery.of(context).size.width,
-                  height: 400.0,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF3EB8D4),
-                        Color(0xFF1F8DA6),
+                ClipPath(
+                  clipper: BottomCurvedClipper(),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    width: MediaQuery.of(context).size.width,
+                    height: 400.0,
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Color(0xFF3EB8D4),
+                          Color(0xFF1F8DA6),
+                        ],
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Hero(
+                          tag: category.title,
+                          child: Image(
+                            image: AssetImage(
+                              category.imagePath,
+                            ),
+                            width: 120.0,
+                            height: 120.0,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          category.title,
+                          style: GoogleFonts.tajawal(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: AppColors.white,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Hero(
-                        tag: category.title,
-                        child: Image(
-                          image: AssetImage(
-                            category.imagePath,
-                          ),
-                          width: 120.0,
-                          height: 120.0,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        category.title,
-                        style: GoogleFonts.tajawal(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.white,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                //  Bottom rounded shape
-                const Positioned(
-                  bottom: -950.0,
-                  child: CircleAvatar(
-                    radius: 500,
-                    backgroundColor: Color(0xFFfafafa),
                   ),
                 ),
                 // Circles
@@ -238,25 +234,7 @@ class StartQuiz extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class CirclePlaceholder extends StatelessWidget {
-  final double radius;
-  final double? opacity;
-
-  const CirclePlaceholder({
-    super.key,
-    required this.radius,
-    this.opacity = 0.1,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: Colors.white.withOpacity(opacity!),
+      backgroundColor: const Color(0xFFFAFAFA),
     );
   }
 }
