@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/screens/tabs.dart';
+import 'package:quiz/screens/register.dart';
+import 'package:quiz/screens/forgot_password.dart';
+import 'package:quiz/widgets/bottom_wave_clipper.dart';
+import 'package:quiz/widgets/top_wave_clipper.dart';
 import 'package:quiz/utils/app_colors.dart';
+import 'package:quiz/utils/custom_input_decoration.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,6 +29,13 @@ class _LoginState extends State<Login> {
   void initState() {
     super.initState();
     _checkLogin();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
   }
 
   Future<void> _checkLogin() async {
@@ -152,59 +164,10 @@ class _LoginState extends State<Login> {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            HugeIcons.strokeRoundedMail02,
-                            color: AppColors.gray,
-                          ),
-                          label: Text(
-                            'البريد الإلكتروني',
-                            style: GoogleFonts.tajawal(
-                              color: AppColors.gray,
-                            ),
-                          ),
+                        decoration: inputDecoration(
+                          prefixIcon: HugeIcons.strokeRoundedMail02,
+                          label: 'البريد الإلكتروني',
                           hintText: 'ادخل بريدك الإلكتروني',
-                          hintStyle: GoogleFonts.tajawal(
-                            color: AppColors.gray,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.gray.withOpacity(0.5),
-                            ),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.primary,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.danger,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.danger,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorStyle: GoogleFonts.tajawal(
-                            color: AppColors.danger,
-                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -222,12 +185,10 @@ class _LoginState extends State<Login> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        textInputAction: TextInputAction.done,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            HugeIcons.strokeRoundedLockPassword,
-                            color: AppColors.gray,
-                          ),
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.next,
+                        decoration: inputDecoration(
+                          prefixIcon: HugeIcons.strokeRoundedLockPassword,
                           suffixIcon: GestureDetector(
                             onTap: () => setState(
                               () => _isPasswordVisible = !_isPasswordVisible,
@@ -239,54 +200,8 @@ class _LoginState extends State<Login> {
                               color: AppColors.gray,
                             ),
                           ),
-                          label: Text(
-                            'كلمة المرور',
-                            style: GoogleFonts.tajawal(
-                              color: AppColors.gray,
-                            ),
-                          ),
+                          label: 'كلمة المرور',
                           hintText: 'ادخل كلمة المرور',
-                          hintStyle: GoogleFonts.tajawal(
-                            color: AppColors.gray,
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.gray.withOpacity(0.5),
-                            ),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.primary,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.danger,
-                              width: 2.0,
-                            ),
-                          ),
-                          focusedErrorBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(16.0),
-                            ),
-                            borderSide: BorderSide(
-                              color: AppColors.danger,
-                              width: 2.0,
-                            ),
-                          ),
-                          errorStyle: GoogleFonts.tajawal(
-                            color: AppColors.danger,
-                          ),
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -334,7 +249,14 @@ class _LoginState extends State<Login> {
                             ],
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ForgotPassword(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'نسيت كلمة المرور؟',
                               style: GoogleFonts.tajawal(
@@ -391,7 +313,14 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Register(),
+                                ),
+                              );
+                            },
                             child: Text(
                               'إنشاء حساب',
                               style: GoogleFonts.tajawal(
@@ -413,56 +342,4 @@ class _LoginState extends State<Login> {
       backgroundColor: const Color(0xFFFAFAFA),
     );
   }
-}
-
-class TopWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(0, size.height - 50);
-    path.quadraticBezierTo(
-      size.width * 0.25,
-      size.height - 100,
-      size.width * 0.5,
-      size.height - 50,
-    );
-    path.quadraticBezierTo(
-      size.width * 0.75,
-      size.height,
-      size.width,
-      size.height - 50,
-    );
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
-}
-
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    final path = Path();
-    path.lineTo(0, size.height - 30);
-    path.quadraticBezierTo(
-      size.width * 0.25,
-      size.height,
-      size.width * 0.5,
-      size.height - 30,
-    );
-    path.quadraticBezierTo(
-      size.width * 0.75,
-      size.height - 60,
-      size.width,
-      size.height - 30,
-    );
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => false;
 }
