@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/finish_quiz.dart';
 import 'package:quiz/screens/tabs.dart';
+import 'package:quiz/screens/finish_quiz.dart';
 import 'package:quiz/models/quiz.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -35,9 +35,10 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
 
   Timer? timer;
   int initTime = 15;
-  int remainingTime = 0;
-  bool isTimeUp = false;
-  bool isTimePaused = false;
+  bool isTimeUp = false; // Flag to check if the time is up
+  bool isTimePaused = false; // Flag to check if the time is paused
+  // To store the progress position of a paused animation.
+  double pausedAnimationProgress = 0.0;
 
   @override
   void initState() {
@@ -46,6 +47,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
     quiz.questionsList = DummyData.questions
         .where((question) => question.categoryId == widget.categoryId)
         .toList();
+    // Shuffle questions
     quiz.shuffleQuestions();
 
     // Initialize circular indicator
@@ -85,14 +87,18 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
 
   void startTimer() {
     timer?.cancel();
-    circularIndicatorController.reset();
-    circularIndicatorController.forward();
-    if (isTimePaused) isTimePaused = false;
+    if (isTimePaused) {
+      isTimePaused = false;
+      circularIndicatorController.forward(from: pausedAnimationProgress);
+    } else {
+      circularIndicatorController.reset();
+      circularIndicatorController.forward();
+    }
+
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         if (initTime > 0) {
           initTime--;
-          remainingTime = initTime;
         } else {
           timer.cancel();
           isTimeUp = true;
@@ -107,6 +113,9 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
     if (timer != null && timer!.isActive) {
       timer!.cancel();
       isTimePaused = true;
+      // Get the current progress of the animation
+      pausedAnimationProgress = circularIndicatorController.value;
+      circularIndicatorController.stop();
     }
   }
 
@@ -207,7 +216,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
           ),
           onPressed: () {
             pauseTimer();
-            circularIndicatorController.stop();
+
             var alertStyle = const AlertStyle(
               isCloseButton: false,
               isOverlayTapDismiss: false,
@@ -382,10 +391,10 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                               width: 60.0,
                               height: 60.0,
                               child: CircularProgressIndicator(
+                                value: circularIndicatorAnimation.value,
                                 color: circularIndicatorColorAnimation.value,
                                 strokeWidth: 6.0,
                                 strokeCap: StrokeCap.round,
-                                value: circularIndicatorAnimation.value,
                                 backgroundColor: AppColors.lightGray,
                               ),
                             );
