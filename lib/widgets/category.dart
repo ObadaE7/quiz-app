@@ -62,7 +62,7 @@ class Category extends StatelessWidget {
                 '$questionCount عدد الاسئلة',
                 style: GoogleFonts.tajawal(
                   fontSize: 16.0,
-                  color: AppColors.gray,
+                  color: AppColors.mediumGray,
                   shadows: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),

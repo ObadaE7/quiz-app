@@ -9,24 +9,24 @@ InputDecoration inputDecoration({
   Widget? suffixIcon,
 }) =>
     InputDecoration(
-      prefixIcon: Icon(prefixIcon, color: AppColors.gray),
+      prefixIcon: Icon(prefixIcon, color: AppColors.mediumGray),
       suffixIcon: suffixIcon,
       label: Text(
         label,
         style: GoogleFonts.tajawal(
-          color: AppColors.gray,
+          color: AppColors.mediumGray,
         ),
       ),
       hintText: hintText,
       hintStyle: GoogleFonts.tajawal(
-        color: AppColors.gray,
+        color: AppColors.mediumGray,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: const BorderRadius.all(
           Radius.circular(16.0),
         ),
         borderSide: BorderSide(
-          color: AppColors.gray.withOpacity(0.5),
+          color: AppColors.mediumGray.withOpacity(0.5),
         ),
       ),
       focusedBorder: const OutlineInputBorder(
@@ -34,7 +34,7 @@ InputDecoration inputDecoration({
           Radius.circular(16.0),
         ),
         borderSide: BorderSide(
-          color: AppColors.primary,
+          color: AppColors.cyan,
           width: 2.0,
         ),
       ),
@@ -43,7 +43,7 @@ InputDecoration inputDecoration({
           Radius.circular(16.0),
         ),
         borderSide: BorderSide(
-          color: AppColors.danger,
+          color: AppColors.red,
           width: 2.0,
         ),
       ),
@@ -52,11 +52,11 @@ InputDecoration inputDecoration({
           Radius.circular(16.0),
         ),
         borderSide: BorderSide(
-          color: AppColors.danger,
+          color: AppColors.red,
           width: 2.0,
         ),
       ),
       errorStyle: GoogleFonts.tajawal(
-        color: AppColors.danger,
+        color: AppColors.red,
       ),
     );

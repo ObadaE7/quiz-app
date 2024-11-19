@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/tabs.dart';
-import 'package:quiz/screens/register.dart';
-import 'package:quiz/screens/forgot_password.dart';
+import 'package:quiz/screens/main/tabs.dart';
+import 'package:quiz/screens/auth/register.dart';
+import 'package:quiz/screens/auth/forgot_password.dart';
 import 'package:quiz/widgets/bottom_wave_clipper.dart';
 import 'package:quiz/widgets/top_wave_clipper.dart';
 import 'package:quiz/utils/app_colors.dart';
@@ -69,7 +69,7 @@ class _LoginState extends State<Login> {
             content: Text(
               'البريد الإلكتروني أو كلمة المرور غير صالحة',
               style: GoogleFonts.tajawal(
-                color: Colors.white,
+                color: AppColors.white,
               ),
               textAlign: TextAlign.center,
             ),
@@ -101,8 +101,8 @@ class _LoginState extends State<Login> {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            Color(0xFF3EB8D4),
-                            Color(0xFF1F8DA6),
+                            AppColors.cyan,
+                            AppColors.darkCyan,
                           ],
                         ),
                       ),
@@ -118,8 +118,8 @@ class _LoginState extends State<Login> {
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            const Color(0xFF3EB8D4).withOpacity(0.5),
-                            const Color(0xFF1F8DA6).withOpacity(0.5),
+                            AppColors.cyan.withOpacity(0.5),
+                            AppColors.darkCyan.withOpacity(0.5),
                           ],
                         ),
                       ),
@@ -136,7 +136,7 @@ class _LoginState extends State<Login> {
                         Text(
                           'Quizzy Champ',
                           style: GoogleFonts.pacifico(
-                            color: Colors.white,
+                            color: AppColors.white,
                             fontSize: 34.0,
                           ),
                         ),
@@ -197,7 +197,7 @@ class _LoginState extends State<Login> {
                               _isPasswordVisible
                                   ? HugeIcons.strokeRoundedViewOffSlash
                                   : HugeIcons.strokeRoundedView,
-                              color: AppColors.gray,
+                              color: AppColors.mediumGray,
                             ),
                           ),
                           label: 'كلمة المرور',
@@ -228,21 +228,21 @@ class _LoginState extends State<Login> {
                                 onChanged: (value) {
                                   setState(() => _isRememberMe = value!);
                                 },
-                                activeColor: AppColors.primary,
+                                activeColor: AppColors.cyan,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
                                 ),
                                 side: const BorderSide(
-                                  color: AppColors.primary,
+                                  color: AppColors.cyan,
                                   width: 2.0,
                                 ),
                               ),
                               Text(
                                 'تذكرني',
                                 style: GoogleFonts.tajawal(
-                                  color: AppColors.gray,
+                                  color: AppColors.mediumGray,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -260,7 +260,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'نسيت كلمة المرور؟',
                               style: GoogleFonts.tajawal(
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -276,8 +276,8 @@ class _LoginState extends State<Login> {
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Color(0xFF3EB8D4),
-                              Color(0xFF1F8DA6),
+                              AppColors.cyan,
+                              AppColors.darkCyan,
                             ],
                           ),
                         ),
@@ -294,7 +294,7 @@ class _LoginState extends State<Login> {
                           child: Text(
                             'تسجيل الدخول',
                             style: GoogleFonts.tajawal(
-                              color: Colors.white,
+                              color: AppColors.white,
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -324,7 +324,7 @@ class _LoginState extends State<Login> {
                             child: Text(
                               'إنشاء حساب',
                               style: GoogleFonts.tajawal(
-                                color: AppColors.primary,
+                                color: AppColors.cyan,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -339,7 +339,7 @@ class _LoginState extends State<Login> {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

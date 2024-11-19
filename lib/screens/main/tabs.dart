@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/home.dart';
-import 'package:quiz/screens/leaderboard.dart';
-import 'package:quiz/screens/profile.dart';
-import 'package:quiz/screens/settings.dart';
+import 'package:quiz/screens/main/home.dart';
+import 'package:quiz/screens/main/leaderboard.dart';
+import 'package:quiz/screens/main/profile.dart';
+import 'package:quiz/screens/main/settings.dart';
 import 'package:quiz/utils/app_colors.dart';
 
 class Tabs extends StatefulWidget {
@@ -30,8 +30,8 @@ class _TabsState extends State<Tabs> {
         onTap: (index) => setState(() => _currentIndex = index),
         type: BottomNavigationBarType.fixed,
         backgroundColor: AppColors.white,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.gray,
+        selectedItemColor: AppColors.cyan,
+        unselectedItemColor: AppColors.mediumGray,
         selectedFontSize: 14.0,
         unselectedFontSize: 12.0,
         // showUnselectedLabels: false,

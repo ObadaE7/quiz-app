@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/login.dart';
+import 'package:quiz/screens/auth/login.dart';
 import 'package:quiz/widgets/bottom_wave_clipper.dart';
 import 'package:quiz/widgets/top_wave_clipper.dart';
 import 'package:quiz/utils/app_colors.dart';
@@ -72,8 +72,8 @@ class _SettingsState extends State<Settings> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xFF3EB8D4),
-                          Color(0xFF1F8DA6),
+                          AppColors.cyan,
+                          AppColors.darkCyan,
                         ],
                       ),
                     ),
@@ -89,8 +89,8 @@ class _SettingsState extends State<Settings> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          const Color(0xFF3EB8D4).withOpacity(0.5),
-                          const Color(0xFF1F8DA6).withOpacity(0.5),
+                          AppColors.cyan.withOpacity(0.5),
+                          AppColors.darkCyan.withOpacity(0.5),
                         ],
                       ),
                     ),
@@ -118,7 +118,7 @@ class _SettingsState extends State<Settings> {
                         height: 80.0,
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         decoration: ShapeDecoration(
-                          color: AppColors.primary.withOpacity(0.1),
+                          color: AppColors.cyan.withOpacity(0.1),
                           shape: SmoothRectangleBorder(
                             borderRadius: SmoothBorderRadius(
                               cornerRadius: 25.0,
@@ -137,7 +137,7 @@ class _SettingsState extends State<Settings> {
                           ),
                           subtitleTextStyle: const TextStyle(
                             fontSize: 14.0,
-                            color: AppColors.gray,
+                            color: AppColors.mediumGray,
                             fontWeight: FontWeight.w500,
                           ),
                           trailing: const Icon(
@@ -173,7 +173,7 @@ class _SettingsState extends State<Settings> {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

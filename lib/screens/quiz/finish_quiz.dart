@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/tabs.dart';
+import 'package:quiz/screens/main/tabs.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
@@ -36,8 +36,8 @@ class _FinishQuizState extends State<FinishQuiz> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF3EB8D4),
-              Color(0xFF1F8DA6),
+              AppColors.cyan,
+              AppColors.darkCyan,
             ],
           ),
         ),

@@ -62,8 +62,8 @@ class _RegisterState extends State<Register> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xFF3EB8D4),
-                          Color(0xFF1F8DA6),
+                          AppColors.cyan,
+                          AppColors.darkCyan,
                         ],
                       ),
                     ),
@@ -79,8 +79,8 @@ class _RegisterState extends State<Register> {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          const Color(0xFF3EB8D4).withOpacity(0.5),
-                          const Color(0xFF1F8DA6).withOpacity(0.5),
+                          AppColors.cyan.withOpacity(0.5),
+                          AppColors.darkCyan.withOpacity(0.5),
                         ],
                       ),
                     ),
@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
                   Text(
                     '!انضم إلى مجتمعنا وابدأ في التحدي',
                     style: GoogleFonts.tajawal(
-                      color: AppColors.gray,
+                      color: AppColors.mediumGray,
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -170,7 +170,7 @@ class _RegisterState extends State<Register> {
                                 _isPasswordVisible[0]
                                     ? HugeIcons.strokeRoundedViewOffSlash
                                     : HugeIcons.strokeRoundedView,
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                               ),
                             ),
                             label: 'كلمة المرور',
@@ -209,7 +209,7 @@ class _RegisterState extends State<Register> {
                                 _isPasswordVisible[1]
                                     ? HugeIcons.strokeRoundedViewOffSlash
                                     : HugeIcons.strokeRoundedView,
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                               ),
                             ),
                             label: 'تأكيد كلمة المرور',
@@ -232,21 +232,21 @@ class _RegisterState extends State<Register> {
                               value: _isAgree,
                               onChanged: (value) =>
                                   setState(() => _isAgree = value!),
-                              activeColor: AppColors.primary,
+                              activeColor: AppColors.cyan,
                               materialTapTargetSize:
                                   MaterialTapTargetSize.shrinkWrap,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6.0),
                               ),
                               side: const BorderSide(
-                                color: AppColors.primary,
+                                color: AppColors.cyan,
                                 width: 2.0,
                               ),
                             ),
                             Text(
                               'موافقة على الشروط والأحكام',
                               style: GoogleFonts.tajawal(
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -261,8 +261,8 @@ class _RegisterState extends State<Register> {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                Color(0xFF3EB8D4),
-                                Color(0xFF1F8DA6),
+                                AppColors.cyan,
+                                AppColors.darkCyan,
                               ],
                             ),
                           ),
@@ -293,7 +293,7 @@ class _RegisterState extends State<Register> {
                             Text(
                               'هل لديك حساب؟',
                               style: GoogleFonts.tajawal(
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -302,7 +302,7 @@ class _RegisterState extends State<Register> {
                               child: Text(
                                 'تسجيل الدخول',
                                 style: GoogleFonts.tajawal(
-                                  color: AppColors.primary,
+                                  color: AppColors.cyan,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -318,7 +318,7 @@ class _RegisterState extends State<Register> {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

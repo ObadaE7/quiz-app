@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quiz/widgets/bottom_curved_clip_path.dart';
+import 'package:quiz/widgets/button_ranked_by.dart';
+import 'package:quiz/widgets/leaderboard_rank.dart';
+import 'package:quiz/widgets/list_tile_leaderboard.dart';
 import 'package:quiz/widgets/circle_placeholder.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -29,8 +32,8 @@ class Leaderboard extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xFF3EB8D4),
-                          Color(0xFF1F8DA6),
+                          AppColors.cyan,
+                          AppColors.darkCyan,
                         ],
                       ),
                     ),
@@ -153,7 +156,6 @@ class Leaderboard extends StatelessWidget {
                     rankColor: const Color(0xFFFF9F41),
                   ),
                 ),
-
                 // Circles
                 const Positioned(
                   top: -50.0,
@@ -198,217 +200,7 @@ class Leaderboard extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
-    );
-  }
-}
-
-class LeaderboardRank extends StatelessWidget {
-  final double width;
-  final double height;
-  final double opacity;
-  final String name;
-  final String avatar;
-  final double avatarRadius;
-  final double score;
-  final int rank;
-  final Color rankColor;
-
-  const LeaderboardRank({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.opacity,
-    required this.name,
-    required this.avatar,
-    required this.avatarRadius,
-    required this.score,
-    required this.rank,
-    required this.rankColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.center,
-      children: [
-        Container(
-          width: width,
-          height: height,
-          decoration: BoxDecoration(
-            color: AppColors.white.withOpacity(opacity),
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16.0),
-              topRight: Radius.circular(16.0),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 40.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  name,
-                  style: GoogleFonts.tajawal(
-                    color: AppColors.white,
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                Text(
-                  '$score',
-                  style: GoogleFonts.tajawal(
-                    color: AppColors.white,
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Positioned(
-          top: -50.0,
-          child: Stack(
-            clipBehavior: Clip.none,
-            alignment: Alignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                  border: Border.all(
-                    color: rankColor,
-                    width: 4.0,
-                  ),
-                ),
-                child: CircleAvatar(
-                  radius: avatarRadius,
-                  backgroundImage: AssetImage(avatar),
-                  backgroundColor: Colors.white,
-                ),
-              ),
-              Positioned(
-                bottom: -10.0,
-                child: CircleAvatar(
-                  radius: 15.0,
-                  backgroundColor: rankColor,
-                  child: Text(
-                    '$rank',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ButtonRankedBy extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final bool isButtonActive;
-
-  const ButtonRankedBy({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.isButtonActive = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FilledButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(
-          isButtonActive ? AppColors.primary : Colors.transparent,
-        ),
-        foregroundColor: WidgetStatePropertyAll(
-          isButtonActive ? AppColors.white : AppColors.gray,
-        ),
-        shape: WidgetStatePropertyAll(
-          SmoothRectangleBorder(
-            borderRadius: SmoothBorderRadius(
-              cornerRadius: 13.0,
-              cornerSmoothing: 1.0,
-            ),
-          ),
-        ),
-      ),
-      child: Text(text),
-    );
-  }
-}
-
-class ListTileLeaderboard extends StatelessWidget {
-  final int rank;
-  final String name;
-  final String avatar;
-  final double score;
-
-  const ListTileLeaderboard({
-    super.key,
-    required this.rank,
-    required this.name,
-    required this.avatar,
-    required this.score,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Text(
-        '$rank',
-        style: GoogleFonts.tajawal(
-          color: AppColors.charcoal,
-          fontSize: 16.0,
-        ),
-      ),
-      title: Row(
-        children: [
-          CircleAvatar(
-            radius: 20.0,
-            backgroundImage: AssetImage(avatar),
-          ),
-          const SizedBox(width: 10.0),
-          Text(
-            name,
-            style: GoogleFonts.tajawal(
-              color: AppColors.charcoal,
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-      trailing: Text(
-        '$score',
-        style: GoogleFonts.tajawal(
-          color: AppColors.primary,
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      tileColor: AppColors.white,
-      contentPadding: const EdgeInsets.symmetric(
-        horizontal: 20.0,
-        vertical: 10.0,
-      ),
-      shape: SmoothRectangleBorder(
-        borderRadius: SmoothBorderRadius(
-          cornerRadius: 16.0,
-        ),
-      ),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

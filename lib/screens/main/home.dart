@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/start_quiz.dart';
+import 'package:quiz/screens/quiz/start_quiz.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/widgets/category.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -41,7 +41,7 @@ class Home extends StatelessWidget {
                         style: GoogleFonts.tajawal(
                           fontSize: 14.0,
                           fontWeight: FontWeight.w500,
-                          color: AppColors.gray,
+                          color: AppColors.mediumGray,
                         ),
                       ),
                     ],
@@ -89,7 +89,7 @@ class Home extends StatelessWidget {
                               '1209',
                               style: GoogleFonts.tajawal(
                                 fontSize: 20.0,
-                                color: AppColors.primary,
+                                color: AppColors.cyan,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -122,7 +122,7 @@ class Home extends StatelessWidget {
                               '348',
                               style: GoogleFonts.tajawal(
                                 fontSize: 20.0,
-                                color: AppColors.primary,
+                                color: AppColors.cyan,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -154,7 +154,7 @@ class Home extends StatelessWidget {
                           style: GoogleFonts.tajawal(
                             fontSize: 14.0,
                             fontWeight: FontWeight.bold,
-                            color: AppColors.primary,
+                            color: AppColors.cyan,
                           ),
                         ),
                       ),
@@ -173,7 +173,7 @@ class Home extends StatelessWidget {
                     style: GoogleFonts.tajawal(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.gray,
+                      color: AppColors.mediumGray,
                     ),
                   ),
                 ],
@@ -215,7 +215,7 @@ class Home extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

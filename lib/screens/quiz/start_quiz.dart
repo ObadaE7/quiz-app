@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/quiz.dart';
+import 'package:quiz/screens/quiz/quiz.dart';
 import 'package:quiz/models/category.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -36,8 +36,8 @@ class StartQuiz extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Color(0xFF3EB8D4),
-                          Color(0xFF1F8DA6),
+                          AppColors.cyan,
+                          AppColors.darkCyan,
                         ],
                       ),
                     ),
@@ -98,7 +98,7 @@ class StartQuiz extends StatelessWidget {
                     category.description,
                     style: GoogleFonts.tajawal(
                       fontSize: 20,
-                      color: AppColors.gray,
+                      color: AppColors.mediumGray,
                     ),
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.rtl,
@@ -109,7 +109,7 @@ class StartQuiz extends StatelessWidget {
                       "${DummyData.questions.where((question) => question.categoryId == category.id).length} سؤال",
                       style: GoogleFonts.tajawal(
                         fontSize: 20,
-                        color: AppColors.gray,
+                        color: AppColors.mediumGray,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -117,13 +117,13 @@ class StartQuiz extends StatelessWidget {
                       "عدد الاسئلة",
                       style: GoogleFonts.tajawal(
                         fontSize: 20,
-                        color: AppColors.gray,
+                        color: AppColors.mediumGray,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
                     trailing: const Icon(
                       HugeIcons.strokeRoundedQuiz05,
-                      color: AppColors.secondary,
+                      color: AppColors.orange,
                       size: 35,
                     ),
                   ),
@@ -132,7 +132,7 @@ class StartQuiz extends StatelessWidget {
                       "${(DummyData.questions.where((question) => question.categoryId == category.id).length * 15 / 60).toStringAsFixed(1)} دقائق",
                       style: GoogleFonts.tajawal(
                         fontSize: 20,
-                        color: AppColors.gray,
+                        color: AppColors.mediumGray,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
@@ -140,13 +140,13 @@ class StartQuiz extends StatelessWidget {
                       "الوقت التقريبي",
                       style: GoogleFonts.tajawal(
                         fontSize: 20,
-                        color: AppColors.gray,
+                        color: AppColors.mediumGray,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
                     trailing: const Icon(
                       HugeIcons.strokeRoundedTimer02,
-                      color: AppColors.primary,
+                      color: AppColors.cyan,
                       size: 35,
                     ),
                   )
@@ -169,7 +169,7 @@ class StartQuiz extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   side: const WidgetStatePropertyAll(
-                    BorderSide(color: AppColors.primary),
+                    BorderSide(color: AppColors.cyan),
                   ),
                   padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(vertical: 16.0)),
@@ -186,7 +186,7 @@ class StartQuiz extends StatelessWidget {
                   'لاحقاً',
                   style: GoogleFonts.tajawal(
                     textStyle: const TextStyle(
-                      color: AppColors.primary,
+                      color: AppColors.cyan,
                       fontSize: 20.0,
                     ),
                   ),
@@ -207,8 +207,7 @@ class StartQuiz extends StatelessWidget {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor:
-                      const WidgetStatePropertyAll(AppColors.primary),
+                  backgroundColor: const WidgetStatePropertyAll(AppColors.cyan),
                   padding: const WidgetStatePropertyAll(
                       EdgeInsets.symmetric(vertical: 16.0)),
                   shape: WidgetStatePropertyAll(
@@ -234,7 +233,7 @@ class StartQuiz extends StatelessWidget {
           ],
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }

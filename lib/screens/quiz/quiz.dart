@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/tabs.dart';
-import 'package:quiz/screens/finish_quiz.dart';
+import 'package:quiz/screens/main/tabs.dart';
+import 'package:quiz/screens/quiz/finish_quiz.dart';
 import 'package:quiz/models/quiz.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:quiz/data/dummy_data.dart';
@@ -58,8 +58,8 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
     circularIndicatorAnimation =
         Tween<double>(begin: 1, end: 0).animate(circularIndicatorController);
     circularIndicatorColorAnimation = ColorTween(
-      begin: AppColors.primary,
-      end: AppColors.danger,
+      begin: AppColors.cyan,
+      end: AppColors.red,
     ).animate(circularIndicatorController);
 
     // Initialize linear indicator
@@ -149,7 +149,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
           style: TextStyle(
             fontSize: 16.0,
             fontWeight: FontWeight.bold,
-            color: AppColors.danger,
+            color: AppColors.red,
           ),
           textAlign: TextAlign.center,
         ),
@@ -241,7 +241,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                 child: Text(
                   'هل ترغب في إنهاء الاختبار الآن؟ سيتم فقدان جميع الإجابات غير المحفوظة.',
                   style: GoogleFonts.tajawal(
-                    color: AppColors.gray,
+                    color: AppColors.mediumGray,
                     fontSize: 16.0,
                     fontWeight: FontWeight.w500,
                   ),
@@ -259,7 +259,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                       ),
                     );
                   },
-                  color: AppColors.danger,
+                  color: AppColors.red,
                   radius: const BorderRadius.all(Radius.circular(16.0)),
                   child: const Text(
                     "الإنهاء",
@@ -277,7 +277,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                       circularIndicatorController.forward();
                     }
                   },
-                  color: AppColors.primary,
+                  color: AppColors.cyan,
                   radius: const BorderRadius.all(Radius.circular(16.0)),
                   child: const Text(
                     "المتابعة",
@@ -310,7 +310,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                   builder: (context, child) => LinearProgressIndicator(
                     value: linearIndicatorAnimation.value,
                     minHeight: 10.0,
-                    color: AppColors.secondary,
+                    color: AppColors.orange,
                     backgroundColor: AppColors.lightGray,
                     borderRadius: const BorderRadius.all(
                       Radius.circular(8.0),
@@ -324,7 +324,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                 style: GoogleFonts.tajawal(
                   textStyle: const TextStyle(
                     fontSize: 16.0,
-                    color: AppColors.primary,
+                    color: AppColors.cyan,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -332,7 +332,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
             ],
           ),
         ),
-        backgroundColor: const Color(0xFFFAFAFA),
+        backgroundColor: AppColors.offWhite,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -350,7 +350,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                   height: 194.0,
                   padding: const EdgeInsets.all(16.0),
                   decoration: ShapeDecoration(
-                    color: AppColors.background,
+                    color: AppColors.lightBlue,
                     shape: SmoothRectangleBorder(
                       borderRadius: SmoothBorderRadius(
                         cornerRadius: 35.0,
@@ -407,7 +407,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                             style: GoogleFonts.tajawal(
                               textStyle: const TextStyle(
                                 fontSize: 30.0,
-                                color: AppColors.gray,
+                                color: AppColors.mediumGray,
                               ),
                             ),
                           ),
@@ -439,9 +439,9 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                         BorderSide(
                           color: isSelected
                               ? isCorrect
-                                  ? AppColors.success
-                                  : AppColors.danger
-                              : AppColors.accent,
+                                  ? AppColors.green
+                                  : AppColors.red
+                              : AppColors.lightAccent,
                           width: isSelected ? 3.0 : 2.0,
                         ),
                       ),
@@ -456,8 +456,8 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                       backgroundColor: WidgetStatePropertyAll(
                         isSelected
                             ? isCorrect
-                                ? AppColors.success.withOpacity(0.2)
-                                : AppColors.danger.withOpacity(0.2)
+                                ? AppColors.green.withOpacity(0.2)
+                                : AppColors.red.withOpacity(0.2)
                             : Colors.transparent,
                       ),
                     ),
@@ -472,9 +472,9 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                               : Icons.circle_outlined,
                           color: isSelected
                               ? isCorrect
-                                  ? AppColors.success
-                                  : AppColors.danger
-                              : AppColors.accent,
+                                  ? AppColors.green
+                                  : AppColors.red
+                              : AppColors.lightAccent,
                           size: 30.0,
                         ),
                         Text(
@@ -485,8 +485,8 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                               color: isSelected
                                   ? isCorrect
                                       ? Colors.green
-                                      : AppColors.danger
-                                  : AppColors.gray,
+                                      : AppColors.red
+                                  : AppColors.mediumGray,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -507,7 +507,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
             nextQuestion();
           },
           style: ButtonStyle(
-            backgroundColor: const WidgetStatePropertyAll(AppColors.primary),
+            backgroundColor: const WidgetStatePropertyAll(AppColors.cyan),
             padding: const WidgetStatePropertyAll(
                 EdgeInsets.symmetric(vertical: 16.0)),
             shape: WidgetStatePropertyAll(
@@ -530,7 +530,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
           ),
         ),
       ),
-      backgroundColor: const Color(0xFFFAFAFA),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }
