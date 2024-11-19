@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:quiz/screens/main/tabs.dart';
 import 'package:quiz/screens/quiz/finish_quiz.dart';
 import 'package:quiz/models/quiz.dart';
@@ -211,12 +212,12 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
             ),
           ),
           icon: const Icon(
-            Icons.close,
+            HugeIcons.strokeRoundedPause,
             color: AppColors.charcoal,
+            size: 20.0,
           ),
           onPressed: () {
             pauseTimer();
-
             var alertStyle = const AlertStyle(
               isCloseButton: false,
               isOverlayTapDismiss: false,

@@ -22,7 +22,7 @@ class Home extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CircleAvatar(
-                    radius: 30.0,
+                    radius: 24.0,
                     backgroundImage: AssetImage('assets/avatars/avatar-1.png'),
                   ),
                   Column(

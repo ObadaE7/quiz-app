@@ -111,8 +111,9 @@ class _SettingsState extends State<Settings> {
                     ),
                   ),
                   ListView.separated(
-                    itemCount: settingsTitle.length,
                     shrinkWrap: true,
+                    itemCount: settingsTitle.length,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       return Container(
                         height: 80.0,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz/screens/main/tabs.dart';
 import 'package:quiz/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:figma_squircle/figma_squircle.dart';
+import 'package:quiz/widgets/action_button.dart';
 
 class FinishQuiz extends StatefulWidget {
   final int questionCount;
@@ -29,162 +29,100 @@ class _FinishQuizState extends State<FinishQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.cyan,
-              AppColors.darkCyan,
-            ],
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image(
-              image: AssetImage(
-                isPassed
-                    ? "assets/animations/party.png"
-                    : "assets/animations/peeking.png",
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Directionality(
+          textDirection: TextDirection.rtl,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image(
+                image: AssetImage(
+                  isPassed
+                      ? "assets/animations/party.png"
+                      : "assets/animations/peeking.png",
+                ),
+                height: 120,
+                width: 120,
+                fit: BoxFit.cover,
               ),
-              height: 150,
-              width: 150,
-              fit: BoxFit.cover,
-            ),
-            const SizedBox(height: 40),
-            Text(
-              "النتيجة النهائية",
-              style: GoogleFonts.tajawal(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+              const SizedBox(height: 40),
+              Text(
+                "نتيجتك هي",
+                style: GoogleFonts.tajawal(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.charcoal,
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "${widget.questionCount}",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              const SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "${widget.questionCount} / ",
+                    style: GoogleFonts.tajawal(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.charcoal,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  "/",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.white.withOpacity(0.8),
+                  Text(
+                    "${widget.score}",
+                    style: GoogleFonts.tajawal(
+                      fontSize: 50,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.cyan,
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  "${widget.score}",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 60,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
                 isPassed
                     ? "أنت بطل! لقد هزمت الأسئلة! 🎉"
                     : "أنت قريب جدًا! هيا بنا نعيد المحاولة! 💪",
                 style: GoogleFonts.tajawal(
                   fontSize: 25,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.white.withOpacity(0.8),
+                  color: AppColors.mediumGray,
                 ),
                 textAlign: TextAlign.center,
                 textDirection: TextDirection.rtl,
               ),
-            ),
-            const SizedBox(height: 40),
-            SizedBox(
-              width: 300.0,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: const WidgetStatePropertyAll(
-                    Colors.white,
-                  ),
-                  padding: const WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  ),
-                  shape: WidgetStatePropertyAll(
-                    SmoothRectangleBorder(
-                      borderRadius: SmoothBorderRadius(
-                        cornerRadius: 25.0,
-                        cornerSmoothing: 1.0,
-                      ),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  "إعادة المحاولة",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.charcoal,
-                  ),
+              const SizedBox(height: 40),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ActionButton(
+                  isFilled: false,
+                  label: 'إعادة من جديد',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: 300.0,
-              child: FilledButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Tabs(),
-                    ),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: const WidgetStatePropertyAll(
-                    Colors.white,
-                  ),
-                  padding: const WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                  ),
-                  shape: WidgetStatePropertyAll(
-                    SmoothRectangleBorder(
-                      borderRadius: SmoothBorderRadius(
-                        cornerRadius: 25.0,
-                        cornerSmoothing: 1.0,
+              const SizedBox(height: 16.0),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: ActionButton(
+                  isHasIcon: false,
+                  label: 'الرئيسية',
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Tabs(),
                       ),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  "الرئيسية",
-                  style: GoogleFonts.tajawal(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.charcoal,
-                  ),
+                    );
+                  },
+                  isFilled: true,
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
+      backgroundColor: AppColors.offWhite,
     );
   }
 }
