@@ -17,8 +17,13 @@ class StartQuiz extends StatefulWidget {
   State<StartQuiz> createState() => _StartQuizState();
 }
 
-class _StartQuizState extends State<StartQuiz> {
+class _StartQuizState extends State<StartQuiz>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _circularIndicatorController;
+  late Animation<double> _circularIndicatorAnimation;
+
   bool _isAnimatedContainerExpanded = false;
+  final int _progressRate = 60;
   late int _questionsCount;
   late double _estimatedTime;
 
@@ -26,11 +31,18 @@ class _StartQuizState extends State<StartQuiz> {
   void initState() {
     super.initState();
 
-    _animateContainer();
-    _initializeQuestionData();
+    _initAnimatedContainer();
+    _initQuestionsData();
+    _initCircularController();
   }
 
-  void _initializeQuestionData() {
+  @override
+  void dispose() {
+    super.dispose();
+    _circularIndicatorController.dispose();
+  }
+
+  void _initQuestionsData() {
     _questionsCount = DummyData.questions
         .where((question) => question.categoryId == widget.category.id)
         .length;
@@ -38,10 +50,29 @@ class _StartQuizState extends State<StartQuiz> {
     _estimatedTime = _questionsCount * 15 / 60;
   }
 
-  void _animateContainer() {
+  void _initAnimatedContainer() {
     Future.delayed(const Duration(milliseconds: 400), () {
       setState(() => _isAnimatedContainerExpanded = true);
     });
+  }
+
+  void _initCircularController() {
+    _circularIndicatorController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4),
+    );
+
+    _circularIndicatorAnimation = Tween<double>(
+      begin: 0.0,
+      end: _progressRate / 100,
+    ).animate(
+      CurvedAnimation(
+        parent: _circularIndicatorController,
+        curve: Curves.easeOutBack,
+      ),
+    );
+
+    _circularIndicatorController.forward();
   }
 
   @override
@@ -144,26 +175,33 @@ class _StartQuizState extends State<StartQuiz> {
                 textDirection: TextDirection.rtl,
               ),
               const SizedBox(height: 46.0),
-              const Stack(
-                alignment: Alignment.center,
-                children: [
-                  CircularProgressIndicator(
-                    value: 0.3,
-                    backgroundColor: AppColors.lightGray,
-                    color: AppColors.cyan,
-                    strokeWidth: 15.0,
-                    strokeAlign: 4.0,
-                    strokeCap: StrokeCap.round,
-                  ),
-                  Text(
-                    '30%',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: AppColors.cyan,
-                    ),
-                  ),
-                ],
+              AnimatedBuilder(
+                animation: _circularIndicatorAnimation,
+                builder: (context, child) {
+                  int progressValue =
+                      (_circularIndicatorAnimation.value * 100.0).toInt();
+                  return Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        value: _circularIndicatorAnimation.value,
+                        backgroundColor: AppColors.lightGray,
+                        color: AppColors.cyan,
+                        strokeWidth: 15.0,
+                        strokeAlign: 4.0,
+                        strokeCap: StrokeCap.round,
+                      ),
+                      Text(
+                        '$progressValue%',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.cyan,
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const SizedBox(height: 46.0),
               Text(

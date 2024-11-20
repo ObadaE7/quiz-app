@@ -5,11 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quiz/widgets/action_button.dart';
 
 class FinishQuiz extends StatefulWidget {
-  final int questionCount;
+  final int questionsCount;
   final int score;
   const FinishQuiz({
     super.key,
-    required this.questionCount,
+    required this.questionsCount,
     required this.score,
   });
 
@@ -23,7 +23,7 @@ class _FinishQuizState extends State<FinishQuiz> {
   @override
   void initState() {
     super.initState();
-    isPassed = widget.score >= (widget.questionCount / 2) ? true : false;
+    isPassed = widget.score >= (widget.questionsCount / 2) ? true : false;
   }
 
   @override
@@ -60,7 +60,7 @@ class _FinishQuizState extends State<FinishQuiz> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${widget.questionCount} / ",
+                    "${widget.questionsCount} / ",
                     style: GoogleFonts.tajawal(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
