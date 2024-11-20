@@ -5,6 +5,7 @@ import 'package:quiz/widgets/category.dart';
 import 'package:quiz/data/dummy_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -14,7 +15,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -50,8 +51,8 @@ class Home extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               Container(
-                height: 90.0,
-                width: double.infinity,
+                height: 100.0,
+                width: MediaQuery.of(context).size.width,
                 decoration: ShapeDecoration(
                   shape: SmoothRectangleBorder(
                     borderRadius: SmoothBorderRadius(
@@ -179,16 +180,13 @@ class Home extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 40.0),
-              GridView.builder(
+              MasonryGridView.count(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 40,
-                  mainAxisExtent: 200.0,
-                ),
+                crossAxisCount: 2,
+                mainAxisSpacing: 40,
+                crossAxisSpacing: 20,
                 itemCount: DummyData.categories.length,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -201,6 +199,7 @@ class Home extends StatelessWidget {
                     );
                   },
                   child: Category(
+                    height: index.isEven ? 180 : 200,
                     imagePath: DummyData.categories[index].imagePath,
                     title: DummyData.categories[index].title,
                     questionCount: DummyData.questions

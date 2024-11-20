@@ -4,12 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 
 class Category extends StatelessWidget {
+  final double height;
   final String imagePath;
   final String title;
   final int questionCount;
 
   const Category({
     super.key,
+    required this.height,
     required this.imagePath,
     required this.title,
     required this.questionCount,
@@ -21,6 +23,7 @@ class Category extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
+          height: height,
           width: double.infinity,
           padding: const EdgeInsets.all(20.0),
           decoration: ShapeDecoration(
@@ -49,28 +52,15 @@ class Category extends StatelessWidget {
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: AppColors.charcoal,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.15),
-                      blurRadius: 3,
-                      offset: const Offset(1, 1),
-                    ),
-                  ],
                 ),
               ),
               Text(
-                '$questionCount عدد الاسئلة',
+                '$questionCount سؤال',
                 style: GoogleFonts.tajawal(
                   fontSize: 16.0,
                   color: AppColors.mediumGray,
-                  shadows: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 2,
-                      offset: const Offset(1, 1),
-                    ),
-                  ],
                 ),
+                textDirection: TextDirection.rtl,
               ),
             ],
           ),
