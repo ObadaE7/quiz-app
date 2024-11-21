@@ -118,6 +118,8 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
         curve: Curves.easeInOutBack,
       ),
     );
+
+    _slideTransitionController.forward();
   }
 
   void _startTimer() {
@@ -529,6 +531,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
+                            textDirection: TextDirection.rtl,
                           ),
                         ],
                       ),

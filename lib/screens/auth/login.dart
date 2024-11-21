@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz/screens/main/tabs.dart';
 import 'package:quiz/screens/auth/register.dart';
@@ -38,6 +40,32 @@ class _LoginState extends State<Login> {
     _passwordController.dispose();
   }
 
+  Future<void> _login() async {
+    if (widget._loginFormKey.currentState!.validate()) {
+      String email = _emailController.text;
+      String password = _passwordController.text;
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? usersPrefsData = prefs.getString('users');
+
+      if (usersPrefsData != null) {
+        Map<String, List<dynamic>> usersMapData =
+            Map<String, List<dynamic>>.from(json.decode(usersPrefsData));
+        if (usersMapData.containsKey(email) &&
+            usersMapData[email]![1] == password) {
+          if (_isRememberMe) {
+            await prefs.setBool('isLoggedIn', true);
+          }
+          _navigateToHomeScreen();
+        } else {
+          _showSnackBar('البريد الإلكتروني او كلمة المرور غير صالحة');
+        }
+      } else {
+        _showSnackBar('هذا المستخدم غير موجود. الرجاء التسجيل أولاً.');
+      }
+    }
+  }
+
   Future<void> _checkLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
@@ -53,31 +81,20 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Future<void> _login() async {
-    if (widget._loginFormKey.currentState!.validate()) {
-      String email = _emailController.text;
-      String password = _passwordController.text;
-      if (email == 'admin@admin.com' && password == 'Admin@1234') {
-        if (_isRememberMe) {
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setBool('isLoggedIn', true);
-        }
-        _navigateToHomeScreen();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'البريد الإلكتروني أو كلمة المرور غير صالحة',
-              style: GoogleFonts.tajawal(
-                color: AppColors.white,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            backgroundColor: AppColors.charcoal,
+  void _showSnackBar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: GoogleFonts.tajawal(
+            color: AppColors.white,
           ),
-        );
-      }
-    }
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: AppColors.charcoal,
+      ),
+    );
+    return;
   }
 
   @override

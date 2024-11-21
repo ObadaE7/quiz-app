@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/screens/quiz/quiz.dart';
+import 'package:quiz/screens/quiz/my_quiz.dart';
 import 'package:quiz/widgets/action_button.dart';
 import 'package:quiz/widgets/circle_placeholder.dart';
 import 'package:quiz/utils/app_colors.dart';

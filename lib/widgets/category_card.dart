@@ -3,18 +3,18 @@ import 'package:quiz/utils/app_colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 
-class Category extends StatelessWidget {
+class CategoryCard extends StatelessWidget {
   final double height;
   final String imagePath;
   final String title;
-  final int questionCount;
+  final int questionsCount;
 
-  const Category({
+  const CategoryCard({
     super.key,
     required this.height,
     required this.imagePath,
     required this.title,
-    required this.questionCount,
+    required this.questionsCount,
   });
 
   @override
@@ -55,7 +55,7 @@ class Category extends StatelessWidget {
                 ),
               ),
               Text(
-                '$questionCount سؤال',
+                '$questionsCount سؤال',
                 style: GoogleFonts.tajawal(
                   fontSize: 16.0,
                   color: AppColors.mediumGray,
