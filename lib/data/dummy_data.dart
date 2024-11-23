@@ -10,7 +10,6 @@ class DummyData {
       description:
           'اختبر معرفتك في عالم الرياضة! مجموعة من الأسئلة المتنوعة حول الألعاب، البطولات، والرياضيين المشهورين.',
       imagePath: 'assets/categories/sports.png',
-      questionsCount: 30,
     ),
     Category(
       id: 2,
@@ -18,7 +17,6 @@ class DummyData {
       description:
           'هل أنت مستعد لاكتشاف العناصر، التفاعلات، والمركبات الكيميائية؟ استعد لتحدي معلوماتك في الكيمياء.',
       imagePath: 'assets/categories/chemistry.png',
-      questionsCount: 30,
     ),
     Category(
       id: 3,
@@ -26,7 +24,6 @@ class DummyData {
       description:
           'اختبر مهاراتك في الحساب، الأشكال، والمعادلات. رحلة مثيرة لعشاق الأرقام والتفكير المنطقي!',
       imagePath: 'assets/categories/math.png',
-      questionsCount: 30,
     ),
     Category(
       id: 4,
@@ -34,7 +31,6 @@ class DummyData {
       description:
           'استرجع الأحداث، الشخصيات، والمراحل التاريخية التي شكلت العالم. اكتشف مدى معرفتك بالتاريخ.',
       imagePath: 'assets/categories/history.png',
-      questionsCount: 30,
     ),
     Category(
       id: 5,
@@ -42,7 +38,6 @@ class DummyData {
       description:
           'هل لديك شغف بالكائنات الحية؟ تحدّ معرفتك بالأحياء، من الخلايا إلى الأنظمة البيئية.',
       imagePath: 'assets/categories/biological.png',
-      questionsCount: 30,
     ),
     Category(
       id: 6,
@@ -50,7 +45,6 @@ class DummyData {
       description:
           'استكشف العالم من خلال الأسئلة الجغرافية حول البلدان، التضاريس، والمناخات المتنوعة.',
       imagePath: 'assets/categories/geography.png',
-      questionsCount: 30,
     ),
   ];
 

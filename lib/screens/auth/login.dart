@@ -162,21 +162,20 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
+              Text(
+                'مرحبًا بعودتك!',
+                style: GoogleFonts.tajawal(
+                  color: AppColors.charcoal,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Form(
                   key: widget._loginFormKey,
                   child: Column(
                     children: [
-                      Text(
-                        'مرحبًا بعودتك!',
-                        style: GoogleFonts.tajawal(
-                          color: AppColors.charcoal,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -242,9 +241,8 @@ class _LoginState extends State<Login> {
                             children: [
                               Checkbox(
                                 value: _isRememberMe,
-                                onChanged: (value) {
-                                  setState(() => _isRememberMe = value!);
-                                },
+                                onChanged: (value) =>
+                                    setState(() => _isRememberMe = value!),
                                 activeColor: AppColors.cyan,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
