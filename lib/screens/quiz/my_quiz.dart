@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:quiz/screens/main/tabs.dart';
@@ -11,6 +12,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyQuiz extends StatefulWidget {
   final int categoryId;
@@ -40,13 +42,19 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
   int initTime = 15;
   bool isTimeUp = false;
   bool isTimePaused = false;
-  // To store the progress position of a paused animation.
   double pausedAnimationProgress = 0.0;
+
+  int _questionsCount = 0;
+  List<int> answeredQuestionsIds = [];
+  int answeredQuestionsIdsCount = 0;
 
   @override
   void initState() {
     super.initState();
-
+    _questionsCount = DummyData.questions
+        .where((question) => question.categoryId == widget.categoryId)
+        .length;
+    _getAnsweredQuestionsCount();
     _initQuestionsData();
     _initCircularController();
     _initLinearController();
@@ -63,12 +71,96 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
     _slideTransitionController.dispose();
   }
 
-  void _initQuestionsData() {
-    // Filter questions by category
+  Future<void> _saveProgress() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? loggedInEmail = prefs.getString('loggedInEmail');
+    String? usersPrefsData = prefs.getString('users');
+    Map<String, List<dynamic>> usersMapData = {};
+
+    if (usersPrefsData == null || loggedInEmail == null) return;
+
+    usersMapData = Map<String, List<dynamic>>.from(json.decode(usersPrefsData));
+    List<dynamic> userData = usersMapData[loggedInEmail] ?? [];
+
+    bool isCategoryFound = false;
+    for (var data in userData) {
+      if (data is Map<String, dynamic> &&
+          data['categoryId'] == widget.categoryId) {
+        if (answeredQuestionsIds.isNotEmpty) {
+          List<dynamic> existingIds = data['answeredQuestionsIds'] ?? [];
+          Set<dynamic> mergedIds = {...existingIds, ...answeredQuestionsIds};
+          data['answeredQuestionsIds'] = mergedIds.toList();
+        }
+        data['score'] = score;
+        isCategoryFound = true;
+        break;
+      }
+    }
+
+    if (!isCategoryFound) {
+      Map<String, dynamic> progressData = {
+        'score': score,
+        'categoryId': widget.categoryId,
+        'answeredQuestionsIds': answeredQuestionsIds,
+      };
+      userData.add(progressData);
+    }
+    usersMapData[loggedInEmail] = userData;
+    await prefs.setString('users', json.encode(usersMapData));
+  }
+
+  Future<void> _getAnsweredQuestionsCount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? loggedInEmail = prefs.getString('loggedInEmail');
+    String? usersPrefsData = prefs.getString('users');
+    Map<String, List<dynamic>> usersMapData = {};
+
+    if (usersPrefsData == null || loggedInEmail == null) return;
+
+    usersMapData = Map<String, List<dynamic>>.from(json.decode(usersPrefsData));
+    List<dynamic>? userData = usersMapData[loggedInEmail];
+
+    if (userData != null) {
+      for (var data in userData) {
+        if (data is Map<String, dynamic> &&
+            data['categoryId'] == widget.categoryId) {
+          setState(() {
+            answeredQuestionsIdsCount =
+                data['answeredQuestionsIds']?.length ?? 0;
+          });
+        }
+      }
+    }
+    _initLinearController();
+  }
+
+  Future<void> _initQuestionsData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? loggedInEmail = prefs.getString('loggedInEmail');
+    String? usersPrefsData = prefs.getString('users');
+    Map<String, List<dynamic>> usersMapData = {};
+
+    if (usersPrefsData == null || loggedInEmail == null) return;
+
+    usersMapData = Map<String, List<dynamic>>.from(json.decode(usersPrefsData));
+    List<dynamic>? userData = usersMapData[loggedInEmail];
+    List<int> answeredQuestionsIds = [];
+
+    for (var data in userData!) {
+      if (data is Map<String, dynamic> &&
+          data['categoryId'] == widget.categoryId) {
+        answeredQuestionsIds =
+            List<int>.from(data['answeredQuestionsIds'] ?? []);
+        break;
+      }
+    }
+
     quiz.questionsList = DummyData.questions
-        .where((question) => question.categoryId == widget.categoryId)
+        .where((question) =>
+            question.categoryId == widget.categoryId &&
+            !answeredQuestionsIds.contains(question.id))
         .toList();
-    // Shuffle questions
+
     quiz.shuffleQuestions();
   }
 
@@ -95,9 +187,12 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 500),
     );
 
+    double startValue = answeredQuestionsIdsCount / _questionsCount;
+    double endValue = (answeredQuestionsIdsCount + 1) / _questionsCount;
+
     _linearIndicatorAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0 / quiz.questionsList.length,
+      begin: startValue,
+      end: endValue,
     ).animate(_linearIndicatorController);
 
     _linearIndicatorController.forward();
@@ -153,7 +248,6 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
       // Get the current progress of the animation
       pausedAnimationProgress = _circularIndicatorController.value;
       _circularIndicatorController.stop();
-      // Show the alert
       _alertDialog();
     }
   }
@@ -191,6 +285,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
       buttons: [
         DialogButton(
           onPressed: () {
+            _saveProgress();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const Tabs()),
@@ -236,6 +331,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
       isTimeUp = false;
       timer?.cancel();
       _circularIndicatorController.stop();
+      answeredQuestionsIds.add(quiz.getQuestionId());
       if (userPickedAnswer == quiz.getAnswer()) {
         score++;
         playSound('sounds/correct.aac');
@@ -278,14 +374,15 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
 
         // Reinitialize for the next question
         _linearIndicatorAnimation = Tween<double>(
-          begin: (quiz.getQuestionNumber() + 1) / quiz.questionsList.length,
-          end: (quiz.getQuestionNumber() + 2) / quiz.questionsList.length,
+          begin: answeredQuestionsIdsCount / _questionsCount,
+          end: (answeredQuestionsIdsCount + 2) / _questionsCount,
         ).animate(
           CurvedAnimation(
             parent: _linearIndicatorController,
             curve: Curves.easeOutBack,
           ),
         );
+        answeredQuestionsIdsCount++;
 
         _linearIndicatorController.forward();
         _slideTransitionController.forward();
@@ -293,13 +390,14 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
         quiz.nextQuestion();
         _startTimer();
       } else {
-        // Quiz is finished
         timer?.cancel();
         isTimeUp = false;
+        _saveProgress();
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => FinishQuiz(
+              categoryId: widget.categoryId,
               questionsCount: quiz.questionsList.length,
               score: score,
             ),
@@ -363,7 +461,7 @@ class _MyQuizState extends State<MyQuiz> with TickerProviderStateMixin {
               ),
               const SizedBox(width: 8.0),
               Text(
-                '${quiz.getQuestionNumber() + 1}/${quiz.questionsList.length}',
+                '${answeredQuestionsIdsCount + 1}/$_questionsCount',
                 style: GoogleFonts.tajawal(
                   textStyle: const TextStyle(
                     fontSize: 16.0,

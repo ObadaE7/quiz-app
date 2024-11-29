@@ -56,6 +56,7 @@ class _LoginState extends State<Login> {
           if (_isRememberMe) {
             await prefs.setBool('isLoggedIn', true);
           }
+          await prefs.setString('loggedInEmail', email);
           _navigateToHomeScreen();
         } else {
           _showSnackBar('البريد الإلكتروني او كلمة المرور غير صالحة');

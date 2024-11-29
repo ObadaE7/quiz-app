@@ -6,6 +6,7 @@ import 'package:quiz/screens/main/leaderboard.dart';
 import 'package:quiz/screens/main/profile.dart';
 import 'package:quiz/screens/main/settings.dart';
 import 'package:quiz/screens/main/tabs.dart';
+
 // import 'screens/quiz/finish_quiz.dart';
 // import 'screens/quiz/my_quiz.dart';
 // import 'screens/quiz/start_quiz.dart';

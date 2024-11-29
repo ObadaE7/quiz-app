@@ -51,18 +51,21 @@ class DummyData {
   static List<Question> questions = [
     // Sports
     Question(
+      id: 1,
       text: "ما هي الرياضة التي يتم فيها استخدام المضرب والكرة الصغيرة؟",
       options: ["كرة القدم", "التنس", "ركوب الدراجات", "السباحة"],
       answer: 1,
       categoryId: 1,
     ),
     Question(
+      id: 2,
       text: "كم عدد اللاعبين في فريق كرة السلة الواحد داخل الملعب؟",
       options: ["خمسة لاعبين", "ستة لاعبين", "سبعة لاعبين", "أربعة لاعبين"],
       answer: 0,
       categoryId: 1,
     ),
     Question(
+      id: 3,
       text: "ما هو اسم البطولة الأكبر لكرة القدم في العالم؟",
       options: [
         "دوري أبطال أوروبا",
@@ -74,60 +77,70 @@ class DummyData {
       categoryId: 1,
     ),
     Question(
+      id: 4,
       text: "ما هي الرياضة التي يتم فيها استخدام المضرب والكرة على طاولة؟",
       options: ["كرة الطاولة", "التنس الأرضي", "كرة السلة", "البيسبول"],
       answer: 0,
       categoryId: 1,
     ),
     Question(
+      id: 5,
       text: "كم عدد اللاعبين في فريق كرة القدم الأساسي؟",
       options: ["9", "10", "11", "12"],
       answer: 2,
       categoryId: 1,
     ),
     Question(
+      id: 6,
       text: "من هو اللاعب الذي يُلقب بالأسطورة في كرة القدم؟",
       options: ["دييغو مارادونا", "ليونيل ميسي", "كريستيانو رونالدو", "بيليه"],
       answer: 3,
       categoryId: 1,
     ),
     Question(
+      id: 7,
       text: "من هو اللاعب الذي يُعرف بلقب 'البرغوث' في كرة القدم؟",
       options: ["محمد صلاح", "كريستيانو رونالدو", "ليونيل ميسي", "نيمار"],
       answer: 2,
       categoryId: 1,
     ),
     Question(
+      id: 8,
       text: "أي دولة تستضيف سباق الفورمولا 1 في موناكو؟",
       options: ["ألمانيا", "موناكو", "إيطاليا", "فرنسا"],
       answer: 1,
       categoryId: 1,
     ),
     Question(
+      id: 9,
       text: "ما هي الرياضة التي تُلعب باستخدام القرص الطائر؟",
       options: ["التنس", "الهوكي", "كرة اليد", "ألتيميت فريزبي"],
       answer: 3,
       categoryId: 1,
     ),
     Question(
+      id: 10,
       text: "في أي عام أُقيمت أول دورة ألعاب أولمبية حديثة؟",
       options: ["1888", "1896", "1912", "1900"],
       answer: 1,
       categoryId: 1,
     ),
     Question(
+      id: 11,
       text: "ما هو عدد الحلقات الأولمبية الموجودة في الشعار؟",
       options: ["6 حلقات", "5 حلقات", "7 حلقات", "4 حلقات"],
       answer: 1,
       categoryId: 1,
     ),
     Question(
+      id: 12,
       text: "أي رياضة يُستخدم فيها الحزام الأسود؟",
       options: ["الجودو", "الملاكمة", "الكاراتيه", "التيكواندو"],
       answer: 0,
       categoryId: 1,
     ),
     Question(
+      id: 13,
       text:
           "من هو اللاعب الذي يحمل الرقم القياسي في الفوز ببطولات التنس الكبرى؟",
       options: [
@@ -140,30 +153,35 @@ class DummyData {
       categoryId: 1,
     ),
     Question(
+      id: 14,
       text: "ما هي الدولة التي فازت بكأس العالم 5 مرات؟",
       options: ["الأرجنتين", "إيطاليا", "البرازيل", "ألمانيا"],
       answer: 2,
       categoryId: 1,
     ),
     Question(
+      id: 15,
       text: "في أي رياضة يُطلق على الهدف اسم 'محاولة'؟",
       options: ["الكريكيت", "البيسبول", "الرجبي", "كرة القدم"],
       answer: 2,
       categoryId: 1,
     ),
     Question(
+      id: 16,
       text: "كم عدد الأشواط في مباراة كرة الطائرة؟",
       options: ["4 أشواط", "2 شوط", "3 أشواط", "5 أشواط"],
       answer: 3,
       categoryId: 1,
     ),
     Question(
+      id: 17,
       text: "ما اسم الرياضة التي تُلعب على الجليد باستخدام عصا وقرص؟",
       options: ["التزلج الفني", "البياثلون", "الهوكي الجليدي", "الباندي"],
       answer: 2,
       categoryId: 1,
     ),
     Question(
+      id: 18,
       text: "ما هو لقب محمد علي كلاي في عالم الملاكمة؟",
       options: ["الأعظم", "المقاتل", "الملك", "الأسطورة"],
       answer: 0,
@@ -172,90 +190,105 @@ class DummyData {
 
     // Chemistry
     Question(
+      id: 19,
       text: "ما هو الرمز الكيميائي للماء؟",
       options: ["CH4", "CO2", "H2O", "O2"],
       answer: 2,
       categoryId: 2,
     ),
     Question(
+      id: 20,
       text: "ما هي الوحدة المستخدمة لقياس كمية المادة؟",
       options: ["مولارية", "كيلوغرام", "مول", "لتر"],
       answer: 2,
       categoryId: 2,
     ),
     Question(
+      id: 21,
       text: "ما العنصر الذي يُعتبر أساس الحياة؟",
       options: ["الأكسجين", "الهيدروجين", "النيتروجين", "الكربون"],
       answer: 3,
       categoryId: 2,
     ),
     Question(
+      id: 22,
       text: "ما هو الرقم الهيدروجيني للماء النقي؟",
       options: ["6", "5", "9", "7"],
       answer: 3,
       categoryId: 2,
     ),
     Question(
+      id: 23,
       text: "ما الغاز الذي يسبب الاحتباس الحراري؟",
       options: ["الأكسجين", "ثاني أكسيد الكربون", "الهيدروجين", "النيتروجين"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 24,
       text: "ما هو العنصر الأكثر وفرة في القشرة الأرضية؟",
       options: ["الكربون", "الأكسجين", "السيليكون", "الألمنيوم"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 25,
       text: "ما هو الرمز الكيميائي لعنصر الذهب؟",
       options: ["Au", "Ag", "Hg", "Pb"],
       answer: 0,
       categoryId: 2,
     ),
     Question(
+      id: 26,
       text: "ما هي الحالة الرابعة من حالات المادة؟",
       options: ["البلازما", "الغاز", "السائل", "الصلب"],
       answer: 0,
       categoryId: 2,
     ),
     Question(
+      id: 27,
       text: "ما نوع الرابطة الكيميائية في جزيء الماء؟",
       options: ["فلزية", "تساهمية", "هيدروجينية", "أيونية"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 28,
       text: "ما هو عدد البروتونات في نواة ذرة الهيدروجين؟",
       options: ["2", "0", "1", "3"],
       answer: 2,
       categoryId: 2,
     ),
     Question(
+      id: 29,
       text: "ما هي الحالة الرابعة للمادة؟",
       options: ["الصلب", "البلازما", "السائل", "الغاز"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 30,
       text: "ما هو العنصر الذي يستخدم في صناعة البطاريات؟",
       options: ["الكالسيوم", "الليثيوم", "الماغنيسيوم", "الصوديوم"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 31,
       text: "أي من هذه المركبات هو ملح الطعام؟",
       options: ["KCl", "NaCl", "HCl", "CaCO3"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 32,
       text: "ما هو الغاز المستخدم في تعبئة المصابيح الكهربائية؟",
       options: ["الهيليوم", "الأرجون", "الأكسجين", "النيتروجين"],
       answer: 1,
       categoryId: 2,
     ),
     Question(
+      id: 33,
       text: "ما هو الاسم الشائع لثاني أكسيد الكربون الصلب؟",
       options: [
         "الكربون المتجمد",
@@ -267,12 +300,14 @@ class DummyData {
       categoryId: 2,
     ),
     Question(
+      id: 34,
       text: "ما هي المادة التي تتكون بالكامل من نوع واحد من الذرات؟",
       options: ["العنصر", "المركب", "الإلكترون", "الجزيء"],
       answer: 0,
       categoryId: 2,
     ),
     Question(
+      id: 35,
       text: "ما هو العنصر المسؤول عن لون اللهب الأحمر في الألعاب النارية؟",
       options: ["الحديد", "السترونتيوم", "الصوديوم", "البوتاسيوم"],
       answer: 1,
@@ -281,84 +316,98 @@ class DummyData {
 
     // Mathematics
     Question(
+      id: 36,
       text: "ما هو مجموع زوايا المثلث؟",
       options: ["180 درجة", "90 درجة", "360 درجة", "270 درجة"],
       answer: 0,
       categoryId: 3,
     ),
     Question(
+      id: 37,
       text: "كم يساوي 7 × 8؟",
       options: ["64", "48", "56", "49"],
       answer: 2,
       categoryId: 3,
     ),
     Question(
+      id: 38,
       text: "ما هو الجذر التربيعي للعدد 64؟",
       options: ["6", "9", "8", "7"],
       answer: 2,
       categoryId: 3,
     ),
     Question(
+      id: 39,
       text: "ما هي النسبة المئوية التي تساوي الكسر 1/2؟",
       options: ["75%", "33%", "50%", "25%"],
       answer: 2,
       categoryId: 3,
     ),
     Question(
+      id: 40,
       text: "ما هو الرقم الأولي التالي بعد 7؟",
       options: ["9", "10", "8", "11"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 41,
       text: "كم عدد الأضلاع في الشكل السداسي؟",
       options: ["6", "4", "7", "5"],
       answer: 0,
       categoryId: 3,
     ),
     Question(
+      id: 42,
       text: "كم يساوي 9 ÷ 3؟",
       options: ["6", "4", "2", "3"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 43,
       text: "ما هي قيمة π (باي) بالتقريب؟",
       options: ["3.12", "3.15", "3.141", "3.14"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 44,
       text: "ما هو العدد الذي إذا ضُرب في نفسه يعطي 36؟",
       options: ["9", "5", "7", "6"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 45,
       text: "كم عدد الزوايا في المربع؟",
       options: ["6", "3", "5", "4"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 46,
       text: "ما هو ناتج طرح 15 - 7؟",
       options: ["7", "9", "6", "8"],
       answer: 3,
       categoryId: 3,
     ),
     Question(
+      id: 47,
       text: "ما هو أكبر عدد مكون من رقمين؟",
       options: ["99", "98", "90", "100"],
       answer: 0,
       categoryId: 3,
     ),
     Question(
+      id: 48,
       text: "إذا كان محيط دائرة يساوي 31.4، فما هو نصف قطرها؟ (π = 3.14)",
       options: ["10", "5", "15", "7"],
       answer: 1,
       categoryId: 3,
     ),
     Question(
+      id: 49,
       text: "ما هي صيغة قانون مساحة المستطيل؟",
       options: [
         "الطول ÷ العرض",
@@ -370,6 +419,7 @@ class DummyData {
       categoryId: 3,
     ),
     Question(
+      id: 50,
       text: "ما هو العدد الذي يساوي 2⁴؟",
       options: ["12", "16", "8", "24"],
       answer: 1,
@@ -378,18 +428,21 @@ class DummyData {
 
     // History
     Question(
+      id: 51,
       text: "في أي عام وقعت الثورة الفرنسية؟",
       options: ["1776", "1804", "1789", "1799"],
       answer: 2,
       categoryId: 4,
     ),
     Question(
+      id: 52,
       text: "ما هو الحدث الذي أنهى الحرب العالمية الأولى؟",
       options: ["معاهدة فرساي", "معركة واترلو", "معاهدة باريس", "معاهدة جنيف"],
       answer: 0,
       categoryId: 4,
     ),
     Question(
+      id: 53,
       text: "من كان أول خليفة للمسلمين بعد وفاة النبي محمد صلى الله عليه وسلم؟",
       options: [
         "عثمان بن عفان",
@@ -401,6 +454,7 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 54,
       text: "ما هي الحضارة التي بنت أهرامات الجيزة؟",
       options: [
         "الحضارة الرومانية",
@@ -412,12 +466,14 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 55,
       text: "في أي عام انتهت الحرب العالمية الثانية؟",
       options: ["1939", "1945", "1950", "1941"],
       answer: 1,
       categoryId: 4,
     ),
     Question(
+      id: 56,
       text: "من هو أول رئيس للولايات المتحدة الأمريكية؟",
       options: [
         "بنجامين فرانكلين",
@@ -429,12 +485,14 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 57,
       text: "ما اسم الملكة المصرية الشهيرة التي تزوجت من يوليوس قيصر؟",
       options: ["حتشبسوت", "نفرتيتي", "كليوباترا", "أنخس إن آمون"],
       answer: 2,
       categoryId: 4,
     ),
     Question(
+      id: 58,
       text: "ما هو اسم الحرب التي استمرت 100 عام؟",
       options: [
         "الحرب العالمية الأولى",
@@ -446,12 +504,14 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 59,
       text: "أي مدينة كانت عاصمة الإمبراطورية العثمانية؟",
       options: ["إسطنبول", "بغداد", "أنقرة", "دمشق"],
       answer: 0,
       categoryId: 4,
     ),
     Question(
+      id: 60,
       text: "من كان زعيم حركة الحقوق المدنية في الولايات المتحدة؟",
       options: [
         "روزا باركس",
@@ -463,6 +523,7 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 61,
       text: "ما اسم الحرب التي قادها صلاح الدين ضد الصليبيين؟",
       options: [
         "الحروب الصليبية",
@@ -474,6 +535,7 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 62,
       text: "أي حضارة قديمة اخترعت الكتابة المسمارية؟",
       options: [
         "الحضارة الفينيقية",
@@ -485,6 +547,7 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 63,
       text:
           "ما هي القارة التي استعمرتها الدول الأوروبية في القرن التاسع عشر بشكل واسع؟",
       options: ["آسيا", "أمريكا الجنوبية", "أوقيانوسيا", "أفريقيا"],
@@ -492,18 +555,21 @@ class DummyData {
       categoryId: 4,
     ),
     Question(
+      id: 64,
       text: "في أي عام تم فتح القسطنطينية؟",
       options: ["1453", "1492", "1517", "1415"],
       answer: 0,
       categoryId: 4,
     ),
     Question(
+      id: 65,
       text: "من هو الفرعون الذي بنى أبو الهول؟",
       options: ["رمسيس الثاني", "خفرع", "توت عنخ آمون", "أمنحتب"],
       answer: 1,
       categoryId: 4,
     ),
     Question(
+      id: 66,
       text: "ما اسم الحرب التي اندلعت بين الشمال والجنوب في الولايات المتحدة؟",
       options: [
         "الحرب الإسبانية الأمريكية",
@@ -517,48 +583,56 @@ class DummyData {
 
     // Biology
     Question(
+      id: 67,
       text: "ما هو العضو المسؤول عن ضخ الدم في جسم الإنسان؟",
       options: ["القلب", "الكبد", "الدماغ", "الرئتين"],
       answer: 0,
       categoryId: 5,
     ),
     Question(
+      id: 68,
       text: "ما هي الوحدة الأساسية التي يتكون منها جسم الكائن الحي؟",
       options: ["النواة", "الجسم الخلوي", "الخلية", "الأعضاء"],
       answer: 2,
       categoryId: 5,
     ),
     Question(
+      id: 69,
       text: "ما هو الغاز الذي تستنشقه النباتات أثناء عملية البناء الضوئي؟",
       options: ["الأكسجين", "الهيدروجين", "النيتروجين", "ثاني أكسيد الكربون"],
       answer: 3,
       categoryId: 5,
     ),
     Question(
+      id: 70,
       text: "ما اسم العظام التي تحمي الدماغ؟",
       options: ["الأضلاع", "عظم الجمجمة", "عظم الفخذ", "الفقرة"],
       answer: 1,
       categoryId: 5,
     ),
     Question(
+      id: 71,
       text: "ما هي الوحدة الوراثية الأساسية في جسم الإنسان؟",
       options: ["الكروموسومات", "الجينات", "الخلايا", "الحمض النووي"],
       answer: 1,
       categoryId: 5,
     ),
     Question(
+      id: 72,
       text: "ما هو العضو المسؤول عن تنقية الدم في جسم الإنسان؟",
       options: ["الرئتين", "الكبد", "القلب", "الكلى"],
       answer: 3,
       categoryId: 5,
     ),
     Question(
+      id: 73,
       text: "ما هو العضو الذي ينتج الأنسولين في جسم الإنسان؟",
       options: ["الكبد", "البنكرياس", "الكلى", "القلب"],
       answer: 1,
       categoryId: 5,
     ),
     Question(
+      id: 74,
       text: "ما هي الأجزاء التي تتكون منها الزهرة؟",
       options: [
         "الساق والأوراق",
@@ -570,6 +644,7 @@ class DummyData {
       categoryId: 5,
     ),
     Question(
+      id: 75,
       text:
           "ما هو الاسم العلمي الذي يطلق على الحيوانات التي تتغذى على النباتات فقط؟",
       options: [
@@ -582,36 +657,42 @@ class DummyData {
       categoryId: 5,
     ),
     Question(
+      id: 76,
       text: "ما هو اسم المادة التي تعطي النباتات لونها الأخضر؟",
       options: ["الهيموغلوبين", "الأوكسجين", "الكلوروفيل", "النيتروجين"],
       answer: 2,
       categoryId: 5,
     ),
     Question(
+      id: 77,
       text: "أي من هذه الكائنات يصنف على أنه من اللافقاريات؟",
       options: ["الثعبان", "السمكة", "الدودة", "القرد"],
       answer: 2,
       categoryId: 5,
     ),
     Question(
+      id: 78,
       text: "ما هو الجهاز الذي يربط العضلات بالعظام في الجسم؟",
       options: ["الأوتار", "الأربطة", "الغضاريف", "الأنسجة العضلية"],
       answer: 0,
       categoryId: 5,
     ),
     Question(
+      id: 79,
       text: "ما اسم الهرمون الذي ينظم مستوى السكر في الدم؟",
       options: ["الأنسولين", "الأدرينالين", "الإستروجين", "التستوستيرون"],
       answer: 0,
       categoryId: 5,
     ),
     Question(
+      id: 80,
       text: "ما هي أصغر عظمة في جسم الإنسان؟",
       options: ["عظمة الركاب", "عظمة الفخذ", "عظمة الترقوة", "عظمة العضد"],
       answer: 0,
       categoryId: 5,
     ),
     Question(
+      id: 81,
       text:
           "ما اسم العملية التي تستخدمها النباتات لتحويل الطاقة الشمسية إلى غذاء؟",
       options: [
@@ -624,12 +705,14 @@ class DummyData {
       categoryId: 5,
     ),
     Question(
+      id: 82,
       text: "ما هي الطبقة الخارجية من الجلد التي توفر الحماية؟",
       options: ["الأدمة", "البشرة", "الأنسجة", "الغضاريف"],
       answer: 1,
       categoryId: 5,
     ),
     Question(
+      id: 83,
       text: "ما اسم الفيروس الذي يسبب مرض نقص المناعة المكتسب (الإيدز)؟",
       options: [
         "فيروس الإنفلونزا",
@@ -643,24 +726,28 @@ class DummyData {
 
     // Geography
     Question(
+      id: 84,
       text: "ما هو أكبر قارة من حيث المساحة؟",
       options: ["أفريقيا", "آسيا", "أوروبا", "أمريكا الشمالية"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 85,
       text: "ما هو أطول نهر في العالم؟",
       options: ["نهر الأمازون", "نهر النيل", "نهر اليانغتسي", "نهر المسيسيبي"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 86,
       text: "ما هي عاصمة اليابان؟",
       options: ["سيول", "بكين", "طوكيو", "كيوتو"],
       answer: 2,
       categoryId: 6,
     ),
     Question(
+      id: 87,
       text: "ما هو البحر الذي يفصل بين قارة أوروبا وقارة إفريقيا؟",
       options: [
         "بحر الصين الجنوبي",
@@ -672,60 +759,70 @@ class DummyData {
       categoryId: 6,
     ),
     Question(
+      id: 88,
       text: "ما هي الدولة التي يمر بها خط غرينتش؟",
       options: ["فرنسا", "بريطانيا", "ألمانيا", "السويد"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 89,
       text: "ما هي أكبر دولة من حيث عدد السكان؟",
       options: ["الولايات المتحدة", "الهند", "الصين", "روسيا"],
       answer: 2,
       categoryId: 6,
     ),
     Question(
+      id: 90,
       text: "ما هو اسم القارة القطبية الجنوبية؟",
       options: ["أنتاركتيكا", "أوقيانوسيا", "أوراسيا", "أمريكا الجنوبية"],
       answer: 0,
       categoryId: 6,
     ),
     Question(
+      id: 91,
       text: "أي من هذه البلدان ليس في قارة أفريقيا؟",
       options: ["مصر", "نيجيريا", "ألمانيا", "كينيا"],
       answer: 2,
       categoryId: 6,
     ),
     Question(
+      id: 92,
       text: "ما هو أعلى جبل في العالم؟",
       options: ["جبل كليمنجارو", "جبل إيفرست", "جبل فوجي", "جبل مونبلان"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 93,
       text: "ما هي عاصمة فرنسا؟",
       options: ["برلين", "مدريد", "باريس", "روما"],
       answer: 2,
       categoryId: 6,
     ),
     Question(
+      id: 94,
       text: "في أي قارة يقع جبل إيفرست؟",
       options: ["أفريقيا", "آسيا", "أمريكا الجنوبية", "أوروبا"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 95,
       text: "أي من هذه الدول تعد جزيرة؟",
       options: ["البرازيل", "أستراليا", "كندا", "الأرجنتين"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 96,
       text: "أي من هذه البلدان يمر فيها خط الاستواء؟",
       options: ["الأرجنتين", "إندونيسيا", "روسيا", "كندا"],
       answer: 1,
       categoryId: 6,
     ),
     Question(
+      id: 97,
       text: "ما هو أكبر محيط في العالم؟",
       options: [
         "المحيط الأطلسي",
@@ -737,6 +834,7 @@ class DummyData {
       categoryId: 6,
     ),
     Question(
+      id: 98,
       text: "ما هو أكبر بحيرة في العالم من حيث المساحة؟",
       options: [
         "بحيرة فيكتوريا",
@@ -748,12 +846,14 @@ class DummyData {
       categoryId: 6,
     ),
     Question(
+      id: 99,
       text: "ما هو أطول خط ساحلي في العالم؟",
       options: ["كندا", "أستراليا", "البرازيل", "روسيا"],
       answer: 0,
       categoryId: 6,
     ),
     Question(
+      id: 100,
       text: "ما هو أكبر صحراء في العالم؟",
       options: [
         "صحراء أتاكاما",
@@ -765,6 +865,7 @@ class DummyData {
       categoryId: 6,
     ),
     Question(
+      id: 101,
       text: "أي من هذه الجزر هي جزء من اليونان؟",
       options: ["جزر الكناري", "جزر هاواي", "جزر كيب فيرجين", "جزر كريت"],
       answer: 3,

@@ -17,7 +17,8 @@ class Settings extends StatefulWidget {
 class _SettingsState extends State<Settings> {
   Future<void> _logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await prefs.remove('loggedInEmail');
+    await prefs.remove('isLoggedIn');
     _navigateToLoginScreen();
   }
 

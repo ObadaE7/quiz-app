@@ -4,6 +4,10 @@ class Quiz {
   int _questionNumber = 0;
   List questionsList = DummyData.questions;
 
+  int getQuestionId() {
+    return questionsList[_questionNumber].id;
+  }
+
   String getQuestionName() {
     return questionsList[_questionNumber].text;
   }
@@ -36,5 +40,9 @@ class Quiz {
 
   void shuffleQuestions() {
     questionsList.shuffle();
+  }
+
+  void saveProgress() {
+    print(questionsList[_questionNumber].id);
   }
 }

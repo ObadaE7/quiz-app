@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:quiz/screens/quiz/finish_quiz.dart';
 import 'package:quiz/screens/quiz/my_quiz.dart';
 import 'package:quiz/widgets/action_button.dart';
 import 'package:quiz/widgets/circle_placeholder.dart';
@@ -8,6 +11,7 @@ import 'package:quiz/data/dummy_data.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StartQuiz extends StatefulWidget {
   final Category category;
@@ -23,23 +27,25 @@ class _StartQuizState extends State<StartQuiz>
   late Animation<double> _circularIndicatorAnimation;
 
   bool _isAnimatedContainerExpanded = false;
-  final int _progressRate = 60;
+  int _progressRate = 0;
   late int _questionsCount;
   late double _estimatedTime;
+
+  bool _isAllQuestionsAnswered = false;
+  int _score = 0;
 
   @override
   void initState() {
     super.initState();
-
     _initAnimatedContainer();
     _initQuestionsData();
-    _initCircularController();
+    _getProgressRate();
   }
 
   @override
   void dispose() {
-    super.dispose();
     _circularIndicatorController.dispose();
+    super.dispose();
   }
 
   void _initQuestionsData() {
@@ -50,8 +56,50 @@ class _StartQuizState extends State<StartQuiz>
     _estimatedTime = _questionsCount * 15 / 60;
   }
 
+  Future<void> _getProgressRate() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? loggedInEmail = prefs.getString('loggedInEmail');
+    String? usersPrefsData = prefs.getString('users');
+    Map<String, List<dynamic>> usersMapData = {};
+
+    if (usersPrefsData == null || loggedInEmail == null) return;
+
+    int answeredQuestionsCount = 0;
+    usersMapData = Map<String, List<dynamic>>.from(json.decode(usersPrefsData));
+
+    if (usersMapData.containsKey(loggedInEmail)) {
+      List<dynamic> userData = usersMapData[loggedInEmail]!;
+      for (var data in userData) {
+        try {
+          if (data['categoryId'] == widget.category.id) {
+            List<dynamic> answeredQuestionsIds = data['answeredQuestionsIds'];
+            answeredQuestionsCount += answeredQuestionsIds.length;
+            _score = data['score'];
+          }
+        } catch (e) {
+          // ignore: avoid_print
+          print(e);
+        }
+      }
+      _isAllQuestionsAnswered = answeredQuestionsCount == _questionsCount;
+      setState(() {
+        _progressRate =
+            (answeredQuestionsCount / _questionsCount * 100).toInt();
+      });
+      _initCircularController();
+    }
+  }
+
+  // void _initAnimatedContainer() {
+  //   Future.delayed(const Duration(milliseconds: 400), () {
+  //     setState(() => _isAnimatedContainerExpanded = true);
+  //   });
+  // }
+  // You can replace the Future.delayed with a direct use of WidgetsBinding.instance.addPostFrameCallback
+  // to trigger state changes after the first frame.
+  // This is a more efficient and clearer way to handle delayed state changes.
   void _initAnimatedContainer() {
-    Future.delayed(const Duration(milliseconds: 400), () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       setState(() => _isAnimatedContainerExpanded = true);
     });
   }
@@ -300,12 +348,18 @@ class _StartQuizState extends State<StartQuiz>
                 icon: HugeIcons.strokeRoundedBackward01,
                 label: 'ابدأ الآن',
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MyQuiz(
-                        categoryId: widget.category.id,
-                      ),
+                      builder: (context) => _isAllQuestionsAnswered
+                          ? FinishQuiz(
+                              categoryId: widget.category.id,
+                              questionsCount: _questionsCount,
+                              score: _score,
+                            )
+                          : MyQuiz(
+                              categoryId: widget.category.id,
+                            ),
                     ),
                   );
                 },
